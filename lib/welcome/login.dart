@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:masken/components/mytextfield.dart';
 
 class Login extends StatelessWidget {
-  const Login({super.key});
-
+  Login({super.key});
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,32 +31,24 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 15.0,
                 ),
-                Container(
-                  width: 370.0,
-                  height: 75.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "username"),
-                  ),
-                ),
+                MyTextField(
+                    controller: usernameController,
+                    hintText: "Username",
+                    obscureText: false),
                 SizedBox(
-                  width: 370.0,
-                  height: 75.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "password"),
-                  ),
+                  height: 15.0,
                 ),
+                MyTextField(
+                    controller: passwordController,
+                    hintText: "Password",
+                    obscureText: true),
+                    SizedBox(height: 20.0,),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xff052659),
-                      minimumSize: Size(350.0, 70.0)),
+                      minimumSize: Size(300.0, 60.0)),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Login()));
@@ -70,33 +64,30 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 15.0,
                 ),
-                Text(
-                  "or login with",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
+               Padding(padding: EdgeInsets.symmetric(horizontal: 25.0),
+               child: Row(
+                children: [
+                  Expanded(child: Divider(
+                    thickness: 0.5,
+                    color: Colors.grey[400],
                   ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff052659),
-                      minimumSize: Size(350.0, 70.0)),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                  },
-                  child: Text(
-                    "تسجيل دخول بأستخدام Google",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Cairo',
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
                   ),
-                ),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text("or login with",
+                  style: TextStyle(color: Colors.grey[300]),
+                  ),
+                  ),
+                  Expanded(child: Divider(
+                    thickness: 0.5,
+                    color: Colors.grey[400],
+                  ),
+                  ),
+                ],
+               ),
+               ),
+               
               ],
             ),
           ),
