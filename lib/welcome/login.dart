@@ -44,7 +44,9 @@ class Login extends StatelessWidget {
                     controller: passwordController,
                     hintText: "Password",
                     obscureText: true),
-                    SizedBox(height: 20.0,),
+                SizedBox(
+                  height: 20.0,
+                ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xff052659),
@@ -54,7 +56,7 @@ class Login extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Login()));
                   },
                   child: Text(
-                    "تسجيل دخول",
+                    "تسجيل الدخول",
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Cairo',
@@ -66,28 +68,36 @@ class Login extends StatelessWidget {
                 SizedBox(
                   height: 15.0,
                 ),
-               Padding(padding: EdgeInsets.symmetric(horizontal: 25.0),
-               child: Row(
-                children: [
-                  Expanded(child: Divider(
-                    thickness: 0.5,
-                    color: Colors.grey[400],
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Text(
+                          "or continue with",
+                          style: TextStyle(color: Colors.grey[300]),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                    ],
                   ),
-                  ),
-                  Padding(padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text("or login with",
-                  style: TextStyle(color: Colors.grey[300]),
-                  ),
-                  ),
-                  Expanded(child: Divider(
-                    thickness: 0.5,
-                    color: Colors.grey[400],
-                  ),
-                  ),
-                ],
-               ),
-               ),
-               
+                ),
+                SizedBox(height: 15.0,),
+                CircleAvatar(
+                  backgroundImage: AssetImage("images/google-icon.png"),
+                )
               ],
             ),
           ),
