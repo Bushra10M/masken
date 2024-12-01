@@ -27,6 +27,7 @@ class Choosing extends StatelessWidget {
                   "إنشاء حساب جديد:",
                   style: TextStyle(
                     color: Colors.white,
+                    fontFamily: "Cairo",
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                   ),
