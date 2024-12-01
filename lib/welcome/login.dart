@@ -31,9 +31,9 @@ class Login extends StatelessWidget {
                 SizedBox(
                   height: 10.0,
                 ),
-                SizedBox(
+                Container(
                   width: 370.0,
-                  height: 70.0,
+                  height: 75.0,
                   child: TextField(
                     decoration: InputDecoration(
                         filled: true,
