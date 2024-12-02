@@ -10,20 +10,20 @@ class Choosing extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("images/House.jfif"),
             fit: BoxFit.cover,
           ),
         ),
         child: Scaffold(
-          backgroundColor: Color(0xFF052659).withOpacity(0.5),
+          backgroundColor: const Color(0xFF052659).withOpacity(0.5),
           body: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "إنشاء حساب جديد:",
                   style: TextStyle(
                     color: Colors.white,
@@ -32,10 +32,10 @@ class Choosing extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
-                Text(
+                const Text(
                   "أي نوع من الحسابات  تريد إنشاؤه؟",
                   style: TextStyle(
                     color: Colors.white,
@@ -44,18 +44,18 @@ class Choosing extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      minimumSize: Size(370.0, 85.0)),
+                      minimumSize: const Size(370.0, 85.0)),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Signupa()));
+                        MaterialPageRoute(builder: (context) => const Signupa()));
                   },
-                  child: Text(
+                  child: const Text(
                     "مكتب عقارات",
                     style: TextStyle(
                       color: Color(0xff052659),
@@ -65,18 +65,18 @@ class Choosing extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      minimumSize: Size(370.0, 85.0)),
+                      minimumSize: const Size(370.0, 85.0)),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Signupc()));
+                        MaterialPageRoute(builder: (context) => const Signupc()));
                   },
-                  child: Text(
+                  child: const Text(
                     "عميل",
                     style: TextStyle(
                       fontFamily: 'Cairo',
