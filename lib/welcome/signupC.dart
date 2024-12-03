@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:masken/components/mytextfield.dart';
 import 'package:masken/welcome/login.dart';
 
 class Signupc extends StatelessWidget {
-  const Signupc({super.key});
-
+  Signupc({super.key});
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmpasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,53 +33,33 @@ class Signupc extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                 const SizedBox(
-                  height: 10.0,
-                ),
                 const SizedBox(
-                  width: 370.0,
-                  height: 70.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "username"),
-                  ),
+                  height: 15.0,
                 ),
-                const SizedBox(
-                  width: 370.0,
-                  height: 75.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "email"),
-                  ),
-                ),
-                const SizedBox(
-                  width: 370.0,
-                  height: 70.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "password"),
-                  ),
-                ),
-                const SizedBox(
-                  width: 370.0,
-                  height: 75.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "phone number"),
-                  ),
-                ),
-                 ElevatedButton(
+                MyTextField(
+                    controller: usernameController,
+                    hintText: "Your Name",
+                    obscureText: false),
+                    SizedBox(height: 15.0,),
+                 MyTextField(
+                    controller: emailController,
+                    hintText: "Email",
+                    obscureText: false),
+                    SizedBox(height: 15.0,),
+                 MyTextField(
+                    controller: passwordController,
+                    hintText: "Password",
+                    obscureText: true),
+                    SizedBox(height: 15.0,),
+                 MyTextField(
+                    controller: confirmpasswordController,
+                    hintText: "Confirm Yuor Password",
+                    obscureText: true),
+                    SizedBox(height: 20.0,),
+                ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff052659),
-                      minimumSize: const Size(350.0, 70.0)),
+                      minimumSize: const Size(300.0, 60.0)),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Login()));

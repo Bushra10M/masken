@@ -97,16 +97,16 @@ class Login extends StatelessWidget {
                 const SizedBox(
                   height: 15.0,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       backgroundImage: AssetImage("images/google-icon.png"),
                     ),
                     SizedBox(
                       width: 10.0,
                     ),
-                    const CircleAvatar(
+                    CircleAvatar(
                       backgroundImage: AssetImage("images/facebook-logo.png"),
                     )
                   ],

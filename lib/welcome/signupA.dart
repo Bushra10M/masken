@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:masken/welcome/choosing.dart';
 import 'package:masken/welcome/login.dart';
+import 'package:masken/components/mytextfield.dart';
 class Signupa extends StatelessWidget {
-  const Signupa({super.key});
-
+   Signupa({super.key});
+  final agencynameController = TextEditingController();
+  final phoneNumController = TextEditingController();
+  final locationController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmpasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,63 +34,43 @@ class Signupa extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                 const SizedBox(
-                  height: 10.0,
-                ),
                 const SizedBox(
-                  width: 370.0,
-                  height: 70.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "Agency Name"),
-                  ),
+                  height: 15.0,
                 ),
-                const SizedBox(
-                  width: 370.0,
-                  height: 75.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "phone number"),
-                  ),
-                ),
-                const SizedBox(
-                  width: 370.0,
-                  height: 70.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "location"),
-                  ),
-                ),
-                const SizedBox(
-                  width: 370.0,
-                  height: 75.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "email"),
-                  ),
-                ),
-                 const SizedBox(
-                  width: 370.0,
-                  height: 75.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "password"),
-                  ),
-                ),
-                 ElevatedButton(
+                 MyTextField(
+                    controller: agencynameController,
+                    hintText: "Agency Name",
+                    obscureText: false),
+                    SizedBox(height: 15.0,),
+                 MyTextField(
+                    controller: phoneNumController,
+                    hintText: "Your Phone Number",
+                    obscureText: false),
+                    SizedBox(height: 15.0,),
+                 MyTextField(
+                    controller: locationController,
+                    hintText: "Agency Location",
+                    obscureText: false),
+                    SizedBox(height: 15.0,),
+                 MyTextField(
+                    controller: emailController,
+                    hintText: "Email",
+                    obscureText: false),
+                    SizedBox(height: 15.0,),
+                 MyTextField(
+                    controller: passwordController,
+                    hintText: "Password",
+                    obscureText: true),
+                    SizedBox(height: 15.0,),
+                 MyTextField(
+                    controller: confirmpasswordController,
+                    hintText: "Confirm Your Password",
+                    obscureText: true),
+                    SizedBox(height: 20.0,),
+                ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff052659),
-                      minimumSize: const Size(350.0, 70.0)),
+                      minimumSize: const Size(300.0, 60.0)),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Login()));
@@ -108,5 +93,3 @@ class Signupa extends StatelessWidget {
     );
   }
 }
-
-  

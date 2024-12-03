@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masken/welcome/choosing.dart';
 import 'package:masken/welcome/login.dart';
-import 'signupC.dart';
 
 class SplashWidget extends StatelessWidget {
   const SplashWidget({super.key});

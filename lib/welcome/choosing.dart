@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:masken/welcome/login.dart';
 import 'package:masken/welcome/signupA.dart';
 import 'package:masken/welcome/signupC.dart';
 
@@ -52,8 +51,10 @@ class Choosing extends StatelessWidget {
                       backgroundColor: Colors.white,
                       minimumSize: const Size(370.0, 85.0)),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Signupa()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  Signupa()));
                   },
                   child: const Text(
                     "مكتب عقارات",
@@ -74,7 +75,7 @@ class Choosing extends StatelessWidget {
                       minimumSize: const Size(370.0, 85.0)),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Signupc()));
+                        MaterialPageRoute(builder: (context) => Signupc()));
                   },
                   child: const Text(
                     "عميل",
