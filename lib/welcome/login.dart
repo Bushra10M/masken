@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:masken/components/mytextfield.dart';
-
+import 'package:masken/components/fixedbackground.dart';
 class Login extends StatelessWidget {
   Login({super.key});
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage("images/House.jfif"),
-          fit: BoxFit.cover,
-        )),
-        child: Scaffold(
-          backgroundColor: const Color(0xFF052659).withOpacity(0.5),
-          body: Padding(
+    return  Scaffold(
+    body: Stack(
+      children: [
+        FixedBackground(),
+          SafeArea(
+            child:
+     Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -115,6 +112,7 @@ class Login extends StatelessWidget {
             ),
           ),
         ),
+      ],
       ),
     );
   }

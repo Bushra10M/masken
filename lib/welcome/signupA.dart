@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masken/components/fixedbackground.dart';
 import 'package:masken/welcome/login.dart';
 import 'package:masken/components/mytextfield.dart';
 class Signupa extends StatelessWidget {
@@ -11,16 +12,12 @@ class Signupa extends StatelessWidget {
   final confirmpasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage("images/House.jfif"),
-          fit: BoxFit.cover,
-        )),
-        child: Scaffold(
-          backgroundColor: const Color(0xFF052659).withOpacity(0.5),
-          body: Padding(
+    return Scaffold(
+    body: Stack(
+      children: [
+        FixedBackground(),
+          SafeArea(
+            child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -88,8 +85,9 @@ class Signupa extends StatelessWidget {
               ],
             ),
           ),
+          ),
+      ],
         ),
-      ),
-    );
+      );
   }
 }

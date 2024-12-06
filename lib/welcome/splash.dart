@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masken/components/fixedbackground.dart';
 import 'package:masken/welcome/choosing.dart';
 import 'package:masken/welcome/login.dart';
 
@@ -10,20 +11,7 @@ class SplashWidget extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background image
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("images/House.jfif"),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            color: const Color(0xFF052659)
-                .withOpacity(0.5), // Semi-transparent overlay
-          ),
-          // Overlay with content
+        const FixedBackground(),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(15.0),
