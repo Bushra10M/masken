@@ -40,22 +40,22 @@ class Signupc extends StatelessWidget {
                     controller: usernameController,
                     hintText: "Your Name",
                     obscureText: false),
-                    SizedBox(height: 15.0,),
+                    const SizedBox(height: 15.0,),
                  MyTextField(
                     controller: emailController,
                     hintText: "Email",
                     obscureText: false),
-                    SizedBox(height: 15.0,),
+                    const SizedBox(height: 15.0,),
                  MyTextField(
                     controller: passwordController,
                     hintText: "Password",
                     obscureText: true),
-                    SizedBox(height: 15.0,),
+                    const SizedBox(height: 15.0,),
                  MyTextField(
                     controller: confirmpasswordController,
                     hintText: "Confirm Yuor Password",
                     obscureText: true),
-                    SizedBox(height: 20.0,),
+                    const SizedBox(height: 20.0,),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff052659),
