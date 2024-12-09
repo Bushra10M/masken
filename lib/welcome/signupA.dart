@@ -15,7 +15,7 @@ class Signupa extends StatelessWidget {
     return Scaffold(
     body: Stack(
       children: [
-        FixedBackground(),
+        const FixedBackground(),
           SafeArea(
             child: Padding(
             padding: const EdgeInsets.all(15.0),

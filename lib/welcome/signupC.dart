@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masken/components/mytextfield.dart';
+import 'package:masken/customer/homepage.dart';
 import 'package:masken/welcome/login.dart';
 import 'package:masken/components/fixedbackground.dart';
 class Signupc extends StatelessWidget {
@@ -13,7 +14,7 @@ class Signupc extends StatelessWidget {
     return Scaffold(
     body: Stack(
       children: [
-        FixedBackground(),
+        const FixedBackground(),
           SafeArea(
             child: 
            Padding(
@@ -23,6 +24,7 @@ class Signupc extends StatelessWidget {
               children: [
                 const Text(
                   'إنشاء حساب عميل:',
+                  textDirection: TextDirection.rtl,
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Cairo',
@@ -59,7 +61,7 @@ class Signupc extends StatelessWidget {
                       minimumSize: const Size(300.0, 60.0)),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
+                        MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   child: const Text(
                     "إنشاء الحساب",

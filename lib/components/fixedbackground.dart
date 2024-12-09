@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class FixedBackground extends StatelessWidget {
-  const FixedBackground({Key? key}) : super(key: key);
+  const FixedBackground({super.key});
 
   @override
   Widget build(BuildContext context) {

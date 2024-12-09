@@ -10,7 +10,7 @@ class Login extends StatelessWidget {
     return  Scaffold(
     body: Stack(
       children: [
-        FixedBackground(),
+        const FixedBackground(),
           SafeArea(
             child:
      Padding(
