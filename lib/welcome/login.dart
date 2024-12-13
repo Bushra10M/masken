@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:masken/components/mytextfield.dart';
 import 'package:masken/components/fixedbackground.dart';
@@ -5,6 +6,9 @@ class Login extends StatelessWidget {
   Login({super.key});
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  Future signIn() async{
+  await FirebaseAuth.instance.signInWithEmailAndPassword(email: usernameController.text.trim(), password: passwordController.text.trim());
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -45,13 +49,11 @@ class Login extends StatelessWidget {
                   height: 20.0,
                 ),
                 ElevatedButton(
+                  
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff052659),
                       minimumSize: const Size(300.0, 60.0)),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                  },
+                  onPressed: signIn,
                   child: const Text(
                     "تسجيل الدخول",
                     style: TextStyle(

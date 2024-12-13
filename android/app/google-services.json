@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "486194141085",
+    "project_id": "masken",
+    "storage_bucket": "masken.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486194141085:android:56b1785ac4bb97c34c8174",
+        "android_client_info": {
+          "package_name": "com.example.masken"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK7SZhTbci2zZVLVhs-FJEQ-KiG6WKMKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

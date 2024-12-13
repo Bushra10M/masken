@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masken/components/mytextfield.dart';
 import 'package:masken/customer/homepage.dart';
-import 'package:masken/welcome/login.dart';
 import 'package:masken/components/fixedbackground.dart';
 class Signupc extends StatelessWidget {
   Signupc({super.key});
@@ -61,7 +60,7 @@ class Signupc extends StatelessWidget {
                       minimumSize: const Size(300.0, 60.0)),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                        MaterialPageRoute(builder: (context) => const HomePage()));
                   },
                   child: const Text(
                     "إنشاء الحساب",

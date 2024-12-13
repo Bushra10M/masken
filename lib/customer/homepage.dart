@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:masken/components/drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,16 +12,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      bottomNavigationBar: BottomNavigationBar(items: [
+      bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
         BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: '')
       ]),
-      body: SafeArea(
+      body: const SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: Text("ابحث عن العقار الذي يناسب احتياجاتك",
               textDirection: TextDirection.rtl,
               style: TextStyle(
@@ -35,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(height: 20.0,),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
                 decoration: InputDecoration(
                   
