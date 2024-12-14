@@ -64,6 +64,7 @@ class Signupc extends StatelessWidget {
                   },
                   child: const Text(
                     "إنشاء الحساب",
+                     textDirection: TextDirection.rtl,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Cairo',

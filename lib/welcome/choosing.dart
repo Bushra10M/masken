@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:masken/welcome/signupA.dart';
 import 'package:masken/welcome/signupC.dart';
+import 'package:masken/components/fixedbackground.dart';
 
 class Choosing extends StatelessWidget {
   const Choosing({super.key});
@@ -10,30 +11,16 @@ class Choosing extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Color overlay covering the entire screen
-
-          // Background image
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("images/House.jfif"),
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Container(
-            color: const Color(0xFF052659)
-                .withOpacity(0.5), // Semi-transparent overlay
-          ),
-          // Overlay with content
+          const FixedBackground(),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(30.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     "إنشاء حساب جديد:",
+                    textDirection: TextDirection.rtl,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: "Cairo",
@@ -46,6 +33,7 @@ class Choosing extends StatelessWidget {
                   ),
                   const Text(
                     "أي نوع من الحسابات  تريد إنشاؤه؟",
+                    textDirection: TextDirection.rtl,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Cairo',
@@ -54,18 +42,19 @@ class Choosing extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 30.0,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        minimumSize: const Size(370.0, 85.0)),
+                        minimumSize: const Size(350.0, 80.0)),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Signupa()));
                     },
                     child: const Text(
                       "مكتب عقارات",
+                      textDirection: TextDirection.rtl,
                       style: TextStyle(
                         color: Color(0xff052659),
                         fontFamily: 'Cairo',
@@ -80,12 +69,13 @@ class Choosing extends StatelessWidget {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        minimumSize: const Size(370.0, 85.0)),
+                        minimumSize: const Size(350.0, 80.0)),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Signupc()));
                     },
                     child: const Text(
+                      textDirection: TextDirection.rtl,
                       "عميل",
                       style: TextStyle(
                         fontFamily: 'Cairo',

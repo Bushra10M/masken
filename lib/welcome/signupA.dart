@@ -1,93 +1,150 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:masken/agency/agency_home.dart';
 import 'package:masken/components/fixedbackground.dart';
+import 'package:masken/helper/helperfun.dart';
 import 'package:masken/welcome/login.dart';
 import 'package:masken/components/mytextfield.dart';
-class Signupa extends StatelessWidget {
-   Signupa({super.key});
+
+class Signupa extends StatefulWidget {
+  Signupa({super.key});
+
+  @override
+  State<Signupa> createState() => _SignupaState();
+}
+
+class _SignupaState extends State<Signupa> {
   final agencynameController = TextEditingController();
+
   final phoneNumController = TextEditingController();
+
   final locationController = TextEditingController();
+
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final confirmpasswordController = TextEditingController();
+
+  void registerUser() async {
+    // show loading circle
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+// make sure paasword match
+    if (passwordController.text != confirmpasswordController.text) {
+      Navigator.pop(context);
+      displayMessageTouser("password don't match", context);
+    } else {
+      // create the user
+      try {
+        UserCredential? userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim());
+        //pop loading circle
+        Navigator.pop(context);
+         Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AgencyHome()));
+      } on FirebaseAuthException catch (e) {
+        Navigator.pop(context);
+        displayMessageTouser(e.code, context);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body: Stack(
-      children: [
-        const FixedBackground(),
+      body: Stack(
+        children: [
+          const FixedBackground(),
           SafeArea(
             child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'إنشاء حساب مكتب عقارات:',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Cairo',
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 15.0,
-                ),
-                 MyTextField(
-                    controller: agencynameController,
-                    hintText: "Agency Name",
-                    obscureText: false),
-                    const SizedBox(height: 15.0,),
-                 MyTextField(
-                    controller: phoneNumController,
-                    hintText: "Your Phone Number",
-                    obscureText: false),
-                    const SizedBox(height: 15.0,),
-                 MyTextField(
-                    controller: locationController,
-                    hintText: "Agency Location",
-                    obscureText: false),
-                    const SizedBox(height: 15.0,),
-                 MyTextField(
-                    controller: emailController,
-                    hintText: "Email",
-                    obscureText: false),
-                    const SizedBox(height: 15.0,),
-                 MyTextField(
-                    controller: passwordController,
-                    hintText: "Password",
-                    obscureText: true),
-                    const SizedBox(height: 15.0,),
-                 MyTextField(
-                    controller: confirmpasswordController,
-                    hintText: "Confirm Your Password",
-                    obscureText: true),
-                    const SizedBox(height: 20.0,),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff052659),
-                      minimumSize: const Size(300.0, 60.0)),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                  },
-                  child: const Text(
-                    "إنشاء الحساب",
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'إنشاء حساب مكتب عقارات:',
+                    textDirection: TextDirection.rtl,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Cairo',
-                      fontSize: 20.0,
+                      fontSize: 25.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  MyTextField(
+                      controller: agencynameController,
+                      hintText: "Agency Name",
+                      obscureText: false),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  MyTextField(
+                      controller: phoneNumController,
+                      hintText: "Your Phone Number",
+                      obscureText: false),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  MyTextField(
+                      controller: locationController,
+                      hintText: "Agency Location",
+                      obscureText: false),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  MyTextField(
+                      controller: emailController,
+                      hintText: "Email",
+                      obscureText: false),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  MyTextField(
+                      controller: passwordController,
+                      hintText: "Password",
+                      obscureText: true),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  MyTextField(
+                      controller: confirmpasswordController,
+                      hintText: "Confirm Your Password",
+                      obscureText: true),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff052659),
+                        minimumSize: const Size(300.0, 60.0)),
+                    onPressed: registerUser,
+                    child: const Text(
+                      "إنشاء الحساب",
+                      textDirection: TextDirection.rtl,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Cairo',
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          ),
-      ],
-        ),
-      );
+        ],
+      ),
+    );
   }
 }
