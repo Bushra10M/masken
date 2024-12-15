@@ -1,16 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:masken/agency/agency_home.dart';
 import 'package:masken/components/mytextfield.dart';
 import 'package:masken/components/fixedbackground.dart';
+import 'package:masken/customer/homepage.dart';
+import 'package:masken/customer/user_model.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  Future<void> signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: usernameController.text.trim(),
-        password: passwordController.text.trim());
+  Future<void> signIn(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: usernameController.text.trim(),
+          password: passwordController.text.trim());
+
+      final user = await loadUsers(email: usernameController.text.trim());
+      if (user == 1) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => AgencyHome()));
+      } else if (user == 2) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+        print('He is not an agency');
+      } else {
+        print('caanot login');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -56,7 +76,9 @@ class Login extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xff052659),
                         minimumSize: const Size(300.0, 60.0)),
-                    onPressed: signIn,
+                    onPressed: () async {
+                      await signIn(context);
+                    },
                     child: const Text(
                       "تسجيل الدخول",
                       style: TextStyle(
@@ -120,5 +142,34 @@ class Login extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<int> loadUsers({required String email}) async {
+    try {
+      final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+      int level = 0;
+      final querSnaphot = await _fireStore.collection('agency').get();
+
+      List<UserModel> users = querSnaphot.docs
+          .map((doc) => UserModel.fromJson(doc.data()))
+          .where((user) => user.email == email)
+          .toList();
+
+      if (users.isEmpty) {
+        final querSnaphot = await _fireStore.collection('clients').get();
+
+        users = querSnaphot.docs
+            .map((doc) => UserModel.fromJson(doc.data()))
+            .where((user) => user.email == email)
+            .toList();
+        level = 2;
+      } else {
+        level = 1;
+      }
+      return level;
+    } catch (e) {
+      print(e.toString());
+      return 0;
+    }
   }
 }

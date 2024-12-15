@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:masken/agency/agency_home.dart';
 import 'package:masken/components/fixedbackground.dart';
+import 'package:masken/customer/user_model.dart';
 import 'package:masken/helper/helperfun.dart';
 import 'package:masken/welcome/login.dart';
 import 'package:masken/components/mytextfield.dart';
@@ -41,18 +43,35 @@ class _SignupaState extends State<Signupa> {
     } else {
       // create the user
       try {
+        final UserModel userModel = UserModel(
+          email: emailController.text,
+          location: locationController.text,
+          name: agencynameController.text,
+          phoneNumber: phoneNumController.text,
+        );
         UserCredential? userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: emailController.text.trim(),
                 password: passwordController.text.trim());
+        addUser(userModel: userModel);
         //pop loading circle
         Navigator.pop(context);
-         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AgencyHome()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
       } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
         displayMessageTouser(e.code, context);
       }
+    }
+  }
+
+  Future<bool> addUser({required UserModel userModel}) async {
+    try {
+      final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+      await _fireStore.collection('agency').add(userModel.toJson());
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
