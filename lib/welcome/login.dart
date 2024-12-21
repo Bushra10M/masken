@@ -20,10 +20,10 @@ class Login extends StatelessWidget {
       final user = await loadUsers(email: usernameController.text.trim());
       if (user == 1) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AgencyHome()));
+            context, MaterialPageRoute(builder: (context) => const AgencyHome()));
       } else if (user == 2) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
         print('He is not an agency');
       } else {
         print('caanot login');
@@ -60,14 +60,14 @@ class Login extends StatelessWidget {
                   ),
                   MyTextField(
                       controller: usernameController,
-                      hintText: "Username",
+                      hintText: "البريد الالكتروني",
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
                   ),
                   MyTextField(
                       controller: passwordController,
-                      hintText: "Password",
+                      hintText: "كلمة المرور",
                       obscureText: true),
                   const SizedBox(
                     height: 20.0,
@@ -146,9 +146,9 @@ class Login extends StatelessWidget {
 
   Future<int> loadUsers({required String email}) async {
     try {
-      final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+      final FirebaseFirestore fireStore = FirebaseFirestore.instance;
       int level = 0;
-      final querSnaphot = await _fireStore.collection('agency').get();
+      final querSnaphot = await fireStore.collection('agency').get();
 
       List<UserModel> users = querSnaphot.docs
           .map((doc) => UserModel.fromJson(doc.data()))
@@ -156,7 +156,7 @@ class Login extends StatelessWidget {
           .toList();
 
       if (users.isEmpty) {
-        final querSnaphot = await _fireStore.collection('clients').get();
+        final querSnaphot = await fireStore.collection('clients').get();
 
         users = querSnaphot.docs
             .map((doc) => UserModel.fromJson(doc.data()))

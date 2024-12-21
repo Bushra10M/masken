@@ -9,7 +9,7 @@ import 'package:masken/welcome/login.dart';
 import 'package:masken/components/mytextfield.dart';
 
 class Signupa extends StatefulWidget {
-  Signupa({super.key});
+  const Signupa({super.key});
 
   @override
   State<Signupa> createState() => _SignupaState();
@@ -67,8 +67,8 @@ class _SignupaState extends State<Signupa> {
 
   Future<bool> addUser({required UserModel userModel}) async {
     try {
-      final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-      await _fireStore.collection('agency').add(userModel.toJson());
+      final FirebaseFirestore fireStore = FirebaseFirestore.instance;
+      await fireStore.collection('agency').add(userModel.toJson());
       return true;
     } catch (e) {
       return false;
@@ -87,6 +87,7 @@ class _SignupaState extends State<Signupa> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  IconButton(onPressed:(){ Navigator.pop(context);}, icon: Icon(Icons.arrow_back ,color:  Colors.white,)),
                   const Text(
                     'إنشاء حساب مكتب عقارات:',
                     textDirection: TextDirection.rtl,
@@ -102,42 +103,42 @@ class _SignupaState extends State<Signupa> {
                   ),
                   MyTextField(
                       controller: agencynameController,
-                      hintText: "Agency Name",
+                      hintText: "أسم الوكالة العقارية",
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
                   ),
                   MyTextField(
                       controller: phoneNumController,
-                      hintText: "Your Phone Number",
+                      hintText: "رقم الهاتف",
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
                   ),
                   MyTextField(
                       controller: locationController,
-                      hintText: "Agency Location",
+                      hintText: "موقع الوكالة",
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
                   ),
                   MyTextField(
                       controller: emailController,
-                      hintText: "Email",
+                      hintText: "البريد الالكتروني",
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
                   ),
                   MyTextField(
                       controller: passwordController,
-                      hintText: "Password",
+                      hintText: "كلمة المرور",
                       obscureText: true),
                   const SizedBox(
                     height: 15.0,
                   ),
                   MyTextField(
                       controller: confirmpasswordController,
-                      hintText: "Confirm Your Password",
+                      hintText: "تأكيد كلمة المرور",
                       obscureText: true),
                   const SizedBox(
                     height: 20.0,

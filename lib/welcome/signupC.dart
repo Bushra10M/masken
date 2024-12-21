@@ -9,7 +9,7 @@ import 'package:masken/helper/helperfun.dart';
 import 'package:masken/welcome/login.dart';
 
 class Signupc extends StatefulWidget {
-  Signupc({super.key});
+  const Signupc({super.key});
 
   @override
   State<Signupc> createState() => _SignupcState();
@@ -17,13 +17,13 @@ class Signupc extends StatefulWidget {
 
 class _SignupcState extends State<Signupc> {
   final usernameController = TextEditingController();
-
+  final phoneNumberController = TextEditingController();
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
   final confirmpasswordController = TextEditingController();
-  final phoneNumber = TextEditingController();
+  
 
   void registerUser() async {
     // show loading circle
@@ -42,14 +42,15 @@ class _SignupcState extends State<Signupc> {
       try {
         final UserModel userModel = UserModel(
             email: emailController.text,
-            location:  '',
-            name:  usernameController.text,
-            phoneNumber: ' phoneNumber.text');
+            location: '',
+            name: usernameController.text,
+            phoneNumber:phoneNumberController.text
+            );
         UserCredential? userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: emailController.text.trim(),
                 password: passwordController.text.trim());
-        addUser(usermodel :userModel );
+        addUser(usermodel: userModel);
         //pop loading circle
         Navigator.pop(context);
         Navigator.push(
@@ -63,8 +64,8 @@ class _SignupcState extends State<Signupc> {
 
   Future<bool> addUser({required UserModel usermodel}) async {
     try {
-      final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-      await _fireStore.collection('clients').add(usermodel.toJson());
+      final FirebaseFirestore fireStore = FirebaseFirestore.instance;
+      await fireStore.collection('clients').add(usermodel.toJson());
       return true;
     } catch (e) {
       return false;
@@ -78,11 +79,14 @@ class _SignupcState extends State<Signupc> {
         children: [
           const FixedBackground(),
           SafeArea(
+  
             child: Padding(
               padding: const EdgeInsets.all(15.0),
+          
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  IconButton(onPressed:(){ Navigator.pop(context);}, icon: Icon(Icons.arrow_back ,color:  Colors.white,)),
                   const Text(
                     'إنشاء حساب عميل:',
                     textDirection: TextDirection.rtl,
@@ -98,28 +102,36 @@ class _SignupcState extends State<Signupc> {
                   ),
                   MyTextField(
                       controller: usernameController,
-                      hintText: "Your Name",
+                      hintText: "أسم المستخدم",
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
                   ),
+                 
+                  MyTextField(
+                      controller: phoneNumberController,
+                      hintText: "رقم الهاتف",
+                      obscureText: false),
+                      const SizedBox(
+                    height: 15.0,
+                  ),
                   MyTextField(
                       controller: emailController,
-                      hintText: "Email",
+                      hintText: "البريد الالكتروني",
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
                   ),
                   MyTextField(
                       controller: passwordController,
-                      hintText: "Password",
+                      hintText: "كلمة المرور",
                       obscureText: true),
                   const SizedBox(
                     height: 15.0,
                   ),
                   MyTextField(
                       controller: confirmpasswordController,
-                      hintText: "Confirm Yuor Password",
+                      hintText: "تأكيد كلمة المرور",
                       obscureText: true),
                   const SizedBox(
                     height: 20.0,

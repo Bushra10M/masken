@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class AgencyHome extends StatefulWidget {
   const AgencyHome({super.key});
 
@@ -9,6 +10,6 @@ class AgencyHome extends StatefulWidget {
 class _AgencyHomeState extends State<AgencyHome> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }
