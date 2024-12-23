@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:masken/components/mytextfield.dart';
 import 'package:masken/customer/homepage.dart';
 import 'package:masken/components/fixedbackground.dart';
-import 'package:masken/customer/user_model.dart';
+import 'package:masken/models/user_model.dart';
 import 'package:masken/helper/helperfun.dart';
 import 'package:masken/welcome/login.dart';
 

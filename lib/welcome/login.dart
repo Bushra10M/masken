@@ -5,7 +5,7 @@ import 'package:masken/agency/agency_home.dart';
 import 'package:masken/components/mytextfield.dart';
 import 'package:masken/components/fixedbackground.dart';
 import 'package:masken/customer/homepage.dart';
-import 'package:masken/customer/user_model.dart';
+import 'package:masken/models/user_model.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});

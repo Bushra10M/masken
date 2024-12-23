@@ -26,7 +26,7 @@ class Propertycard extends StatelessWidget {
           ),
         ),
           ),
-           Column(
+           Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
