@@ -18,7 +18,7 @@ class Choosing extends StatelessWidget {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(onPressed:(){ Navigator.pop(context);}, icon: Icon(Icons.arrow_back ,color:  Colors.white,)),
+                    IconButton(onPressed:(){ Navigator.pop(context);}, icon: const Icon(Icons.arrow_back ,color:  Colors.white,)),
                     const Text(
                       "إنشاء حساب جديد:",
                       textDirection: TextDirection.rtl,
@@ -51,7 +51,7 @@ class Choosing extends StatelessWidget {
                           minimumSize: const Size(300.0, 80.0)),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Signupa()));
+                            MaterialPageRoute(builder: (context) => const Signupa()));
                       },
                       child: const Text(
                         "مكتب عقارات",
@@ -73,7 +73,7 @@ class Choosing extends StatelessWidget {
                           minimumSize: const Size(300.0, 80.0)),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Signupc()));
+                            MaterialPageRoute(builder: (context) => const Signupc()));
                       },
                       child: const Text(
                         textDirection: TextDirection.rtl,

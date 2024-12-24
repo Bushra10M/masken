@@ -1,30 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:masken/customer/propertycard.dart';
+import 'package:masken/models/property_model.dart';
+import 'package:masken/provider/property_provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  List<PropertyModel> properties = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 20.0),
+            padding: EdgeInsets.only(right: 20.0),
             child: Icon(Icons.person),
-          )],
+          )
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'),
         BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'المفضلة'),
-      
       ]),
       body: SafeArea(
         child: Column(
@@ -60,21 +71,34 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 15,),
-            
+            const SizedBox(
+              height: 15,
+            ),
+
             // property list
-          Expanded(
-            child:ListView( 
-              children: [
-             Propertycard(),
-Propertycard(),
-Propertycard()
-            ],
-            ), 
-            )
+            isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                        itemCount: properties.length,
+                        itemBuilder: (context, index) {
+                          return Propertycard(
+                            propertyModel: properties[index],
+                          );
+                        })),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> getData() async {
+    isLoading = true;
+    setState(() {});
+    properties = await fetchProperties();
+    isLoading = false;
+    setState(() {});
   }
 }
