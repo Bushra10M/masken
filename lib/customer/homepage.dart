@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:masken/customer/propertycard.dart';
 import 'package:masken/models/property_model.dart';
 import 'package:masken/provider/property_provider.dart';
+import 'profilec.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -26,12 +27,17 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        actions: const [
+        actions: [
           Padding(
             padding: EdgeInsets.only(right: 20.0),
-            child: Icon(Icons.person),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ClientProfile()));
+                },
+                icon: Icon(Icons.person),
           )
-        ],
+      )],
       ),
       bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'),
