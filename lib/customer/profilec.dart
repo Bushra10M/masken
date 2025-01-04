@@ -27,31 +27,31 @@ class ClientProfile extends StatelessWidget {
               )
             ],
           ),
-          child: Column(
+          child: const Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
                 radius: 50,
                 backgroundColor:  Color(0xff052659),
-                child: const Icon(
+                child: Icon(
                   Icons.person, 
                   size: 60, 
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 20),
-              const UserInfoRow(
+              SizedBox(height: 20),
+              UserInfoRow(
                 icon: Icons.person_outline,
                 label: 'الاسم',
                 value: 'محمد أحمد',
               ),
-              const UserInfoRow(
+              UserInfoRow(
                 icon: Icons.email_outlined,
                 label: 'البريد الإلكتروني',
                 value: 'mohamed@example.com',
               ),
-              const UserInfoRow(
+              UserInfoRow(
                 icon: Icons.phone_outlined,
                 label: 'رقم الهاتف',
                 value: '+966 50 123 4567',

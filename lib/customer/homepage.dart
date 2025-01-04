@@ -1,6 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:masken/components/drawer.dart';
+import 'package:masken/customer/favorite.dart';
 import 'package:masken/customer/propertycard.dart';
 import 'package:masken/models/property_model.dart';
 import 'package:masken/provider/property_provider.dart';
@@ -16,42 +20,59 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<PropertyModel> properties = [];
   bool isLoading = true;
-
+  
   @override
   void initState() {
     getData();
     super.initState();
   }
 
+  void signOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      drawer: MyDrawer(
+        onSignOut: signOut,
+      ),
       appBar: AppBar(
-       backgroundColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         scrolledUnderElevation: 0,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: IconButton(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const ClientProfile()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ClientProfile()));
                 },
-                icon: const Icon(color: Color(0xff052659),Icons.person),
-          )
-      )],
+                icon: const Icon(color: Color(0xff052659), Icons.person),
+              ))
+        ],
       ),
-      bottomNavigationBar: CurvedNavigationBar(
-animationDuration: Duration(milliseconds: 300),
-        color: Color(0xff052659),
+      bottomNavigationBar: BottomNavigationBar(
+       
+        iconSize: 30,
         backgroundColor: Colors.white,
-        items: [
-         Icon(color: Colors.white,Icons.home),
-        Icon(color: Colors.white,Icons.favorite),
-
-      ],),
+        selectedItemColor: Color(0xff052659),
+        elevation: 0,
+        
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: '',
+          )
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [

@@ -19,7 +19,7 @@ class Propertycard extends StatelessWidget {
            color: Colors.grey.shade200,
            spreadRadius: 2,
            blurRadius: 5,
-           offset: Offset(0, 3)
+           offset: const Offset(0, 3)
           ),
           ],
           borderRadius: BorderRadius.circular(12),
