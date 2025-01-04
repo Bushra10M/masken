@@ -7,7 +7,7 @@ class ClientProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('بيانات المستخدم', 
+        title: const Text('بيانات المستخدم', 
           style: TextStyle(fontFamily: 'Cairo'),
         ),
         centerTitle: true,
@@ -15,7 +15,7 @@ class ClientProfile extends StatelessWidget {
       body: Center(
         child: Container(
           width: 300,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
@@ -33,25 +33,25 @@ class ClientProfile extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 50,
-                backgroundColor: Colors.blue[100],
-                child: Icon(
+                backgroundColor:  Color(0xff052659),
+                child: const Icon(
                   Icons.person, 
                   size: 60, 
-                  color:  Color(0xff052659),
+                  color: Colors.white,
                 ),
               ),
-              SizedBox(height: 20),
-              UserInfoRow(
+              const SizedBox(height: 20),
+              const UserInfoRow(
                 icon: Icons.person_outline,
                 label: 'الاسم',
                 value: 'محمد أحمد',
               ),
-              UserInfoRow(
+              const UserInfoRow(
                 icon: Icons.email_outlined,
                 label: 'البريد الإلكتروني',
                 value: 'mohamed@example.com',
               ),
-              UserInfoRow(
+              const UserInfoRow(
                 icon: Icons.phone_outlined,
                 label: 'رقم الهاتف',
                 value: '+966 50 123 4567',
@@ -70,11 +70,11 @@ class UserInfoRow extends StatelessWidget {
   final String value;
 
   const UserInfoRow({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.value,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class UserInfoRow extends StatelessWidget {
             children: [
               Text(
                 value,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Cairo',
@@ -96,7 +96,7 @@ class UserInfoRow extends StatelessWidget {
               ),
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.grey,
                   fontFamily: 'Cairo',
@@ -104,8 +104,8 @@ class UserInfoRow extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 15),
-          Icon(icon, color: Colors.blue),
+          const SizedBox(width: 15),
+          Icon(icon, color: const Color(0xff052659)),
         ],
       ),
     );

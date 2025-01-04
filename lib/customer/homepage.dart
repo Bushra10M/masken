@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:masken/customer/propertycard.dart';
@@ -6,7 +7,7 @@ import 'package:masken/provider/property_provider.dart';
 import 'profilec.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,24 +26,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
+       backgroundColor: Colors.transparent,
         elevation: 0,
+        scrolledUnderElevation: 0,
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 20.0),
+            padding: const EdgeInsets.only(right: 20.0),
             child: IconButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ClientProfile()));
+                      MaterialPageRoute(builder: (context) => const ClientProfile()));
                 },
-                icon: Icon(Icons.person),
+                icon: const Icon(color: Color(0xff052659),Icons.person),
           )
       )],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'المفضلة'),
-      ]),
+      bottomNavigationBar: CurvedNavigationBar(
+animationDuration: Duration(milliseconds: 300),
+        color: Color(0xff052659),
+        backgroundColor: Colors.white,
+        items: [
+         Icon(color: Colors.white,Icons.home),
+        Icon(color: Colors.white,Icons.favorite),
+
+      ],),
       body: SafeArea(
         child: Column(
           children: [

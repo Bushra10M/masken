@@ -13,8 +13,16 @@ class Propertycard extends StatelessWidget {
       child: Container(
         height: 300,
         decoration: BoxDecoration(
+          color:Colors.white
+         , boxShadow: [
+            BoxShadow(
+           color: Colors.grey.shade200,
+           spreadRadius: 2,
+           blurRadius: 5,
+           offset: Offset(0, 3)
+          ),
+          ],
           borderRadius: BorderRadius.circular(12),
-          color: const Color(0xff052659),
         ),
         child: Column(
           children: [
@@ -31,14 +39,17 @@ class Propertycard extends StatelessWidget {
               ),
             ),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+             // crossAxisAlignment: CrossAxisAlignment.start,
+             mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
                   propertyModel.title,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
+                  textDirection: TextDirection.rtl,
+                  style: const TextStyle(
+                    color: Color(0xff052659),
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Cairo'
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -52,7 +63,7 @@ class Propertycard extends StatelessWidget {
                 const SizedBox(height: 5),
                 Text(
                   propertyModel.price,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
