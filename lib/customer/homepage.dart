@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<PropertyModel> properties = [];
   bool isLoading = true;
-  
+
   @override
   void initState() {
     getData();
@@ -56,12 +56,10 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-       
-        iconSize: 30,
+        iconSize: 25,
         backgroundColor: Colors.white,
-        selectedItemColor: Color(0xff052659),
+        selectedItemColor: const Color(0xff052659),
         elevation: 0,
-        
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

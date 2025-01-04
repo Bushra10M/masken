@@ -44,17 +44,17 @@ class ClientProfile extends StatelessWidget {
               UserInfoRow(
                 icon: Icons.person_outline,
                 label: 'الاسم',
-                value: 'محمد أحمد',
+                value: ' بشرى محفوظ',
               ),
               UserInfoRow(
                 icon: Icons.email_outlined,
                 label: 'البريد الإلكتروني',
-                value: 'mohamed@example.com',
+                value: 'Bushra@gmail.com',
               ),
               UserInfoRow(
                 icon: Icons.phone_outlined,
                 label: 'رقم الهاتف',
-                value: '+966 50 123 4567',
+                value: '091234567',
               ),
             ],
           ),

@@ -12,14 +12,14 @@ class MyListTile extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: ListTile(
         
-      leading: Icon(icon, color: Color(0xff052659),),
+      leading: Icon(icon, color: const Color(0xff052659),),
       onTap: onTap,
       title: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
       color: Color(0xff052659),
       fontFamily: 'Cairo',
-      fontSize: 20,
+      fontSize: 15,
       
         ),
       ),

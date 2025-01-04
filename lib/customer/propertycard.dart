@@ -13,14 +13,13 @@ class Propertycard extends StatelessWidget {
       child: Container(
         height: 300,
         decoration: BoxDecoration(
-          color:Colors.white
-         , boxShadow: [
+          color: Colors.white,
+          boxShadow: [
             BoxShadow(
-           color: Colors.grey.shade200,
-           spreadRadius: 2,
-           blurRadius: 5,
-           offset: const Offset(0, 3)
-          ),
+                color: Colors.grey.shade400,
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 3)),
           ],
           borderRadius: BorderRadius.circular(12),
         ),
@@ -38,39 +37,63 @@ class Propertycard extends StatelessWidget {
                 // ),
               ),
             ),
-            Row(
-             // crossAxisAlignment: CrossAxisAlignment.start,
-             mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  propertyModel.title,
-                  textDirection: TextDirection.rtl,
-                  style: const TextStyle(
+            Padding(
+              padding: const EdgeInsets.only(left: 25,right: 25),
+              child: Row(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
                     color: Color(0xff052659),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Cairo'
+                    Icons.favorite_border,
+                    size: 30,
                   ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  propertyModel.location,
-                  style: TextStyle(
-                    color: Colors.grey[300],
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  propertyModel.price,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+                  Text(
+                    propertyModel.title,
+                    textDirection: TextDirection.rtl,
+                    style: const TextStyle(
+                        color: Color(0xff052659),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Cairo'),
+                  ),],
+              ),
             ),
+              //  const SizedBox(height: 10),
+                Padding(
+                   padding: const EdgeInsets.only(left: 25,right: 25),
+                  child: Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                    propertyModel.price,
+                     textDirection: TextDirection.rtl,
+                      style: const TextStyle(
+                          color: Color(0xff052659),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Cairo'),
+                    ),
+                      Row(
+                        children: [
+                          Text(
+                            propertyModel.location,
+                             textDirection: TextDirection.rtl,
+                          style: const TextStyle(
+                              color: Color(0xff052659),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Cairo'),
+                          ),
+                          SizedBox(width: 8,),
+                            Icon(Icons.location_on_outlined,color: Color(0xff052659),size: 20,),
+                        ],
+                      ),
+                  
+                  
+                              ],
+                  ),
+                ),  
           ],
         ),
       ),

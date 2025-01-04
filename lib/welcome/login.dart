@@ -89,52 +89,8 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.grey[400],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(
-                            "or continue with",
-                            style: TextStyle(color: Colors.grey[300]),
-                          ),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.grey[400],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage("images/google-icon.png"),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      CircleAvatar(
-                        backgroundImage: AssetImage("images/facebook-logo.png"),
-                      )
-                    ],
-                  )
+                 
+                 
                 ],
               ),
             ),
