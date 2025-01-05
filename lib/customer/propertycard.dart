@@ -38,7 +38,7 @@ class Propertycard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 25,right: 25),
+              padding: const EdgeInsets.only(left: 25, right: 25),
               child: Row(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,44 +56,49 @@ class Propertycard extends StatelessWidget {
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Cairo'),
-                  ),],
+                  ),
+                ],
               ),
             ),
-              //  const SizedBox(height: 10),
-                Padding(
-                   padding: const EdgeInsets.only(left: 25,right: 25),
-                  child: Row(
-                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //  const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 25, right: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    propertyModel.price,
+                    textDirection: TextDirection.rtl,
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Cairo'),
+                  ),
+                  Row(
                     children: [
                       Text(
-                    propertyModel.price,
-                     textDirection: TextDirection.rtl,
-                      style: const TextStyle(
-                          color: Color(0xff052659),
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Cairo'),
-                    ),
-                      Row(
-                        children: [
-                          Text(
-                            propertyModel.location,
-                             textDirection: TextDirection.rtl,
-                          style: const TextStyle(
-                              color: Color(0xff052659),
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Cairo'),
-                          ),
-                          SizedBox(width: 8,),
-                            Icon(Icons.location_on_outlined,color: Color(0xff052659),size: 20,),
-                        ],
+                        propertyModel.location,
+                        textDirection: TextDirection.rtl,
+                        style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Cairo'),
                       ),
-                  
-                  
-                              ],
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.grey,
+                        size: 20,
+                      ),
+                    ],
                   ),
-                ),  
+                ],
+              ),
+            ),
           ],
         ),
       ),

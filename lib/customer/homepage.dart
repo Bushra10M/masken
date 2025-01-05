@@ -68,6 +68,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: '',
+          ),
+           BottomNavigationBarItem(
+            icon: Icon(Icons.sms),
+            label: '',
           )
         ],
       ),

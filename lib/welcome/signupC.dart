@@ -18,9 +18,7 @@ class _SignupcState extends State<Signupc> {
   final usernameController = TextEditingController();
   final phoneNumberController = TextEditingController();
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
-
   final confirmpasswordController = TextEditingController();
   
 
@@ -40,6 +38,7 @@ class _SignupcState extends State<Signupc> {
       // create the user
       try {
         final UserModel userModel = UserModel(
+            userId: '', 
             email: emailController.text,
             location: '',
             name: usernameController.text,
@@ -49,22 +48,48 @@ class _SignupcState extends State<Signupc> {
             .createUserWithEmailAndPassword(
                 email: emailController.text.trim(),
                 password: passwordController.text.trim());
-        addUser(usermodel: userModel);
-        //pop loading circle
-        Navigator.pop(context);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Login()));
-      } on FirebaseAuthException catch (e) {
-        Navigator.pop(context);
-        displayMessageTouser(e.code, context);
+
+   if (userCredential != null) {
+        // الحصول على userId من Firebase Authentication بعد التسجيل الناجح
+        String userId = userCredential.user!.uid;
+
+        // بناء نموذج المستخدم مع userId
+        final UserModel userModel = UserModel(
+          userId: userId,  // تعيين userId من FirebaseAuth
+          email: emailController.text.trim(),
+          location: '', // المكان يمكن أن يتم تحديده لاحقًا
+          name: usernameController.text.trim(),
+          phoneNumber: phoneNumberController.text.trim(),
+        );
+
+        // إضافة بيانات المستخدم إلى Firestore باستخدام الـ userId
+        bool success = await addUser(usermodel: userModel);
+
+        if (success) {
+          // إذا تم إضافة البيانات بنجاح، انتقل إلى شاشة تسجيل الدخول
+          Navigator.pop(context);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Login()));
+        } else {
+          // إذا فشل إضافة البيانات
+          Navigator.pop(context);
+          displayMessageTouser('Failed to add user data to Firestore', context);
+        }
       }
+    } on FirebaseAuthException catch (e) {
+      // في حالة حدوث خطأ أثناء التسجيل
+      Navigator.pop(context);
+      displayMessageTouser(e.code, context);
     }
   }
+}
+
 
   Future<bool> addUser({required UserModel usermodel}) async {
     try {
       final FirebaseFirestore fireStore = FirebaseFirestore.instance;
-      await fireStore.collection('clients').add(usermodel.toJson());
+    // await fireStore.collection('clients').add(usermodel.toJson());
+       await fireStore.collection('clients').doc(usermodel.userId).set(usermodel.toJson());
       return true;
     } catch (e) {
       return false;

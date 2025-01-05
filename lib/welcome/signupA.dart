@@ -43,6 +43,7 @@ class _SignupaState extends State<Signupa> {
       // create the user
       try {
         final UserModel userModel = UserModel(
+              userId: '', 
           email: emailController.text,
           location: locationController.text,
           name: agencynameController.text,
