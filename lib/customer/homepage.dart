@@ -26,16 +26,11 @@ class _HomePageState extends State<HomePage> {
     getData();
     super.initState();
   }
-
-  void signOut() {
-    FirebaseAuth.instance.signOut();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MyDrawer(
-        onSignOut: signOut,
+        
       ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -69,7 +64,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.favorite),
             label: '',
           ),
-           BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.sms),
             label: '',
           )
@@ -97,10 +92,12 @@ class _HomePageState extends State<HomePage> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
+                textDirection: TextDirection.rtl,
                 decoration: InputDecoration(
-                  hintText: 'Search here',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  hintText: 'ابحث هنا',
+                  hintTextDirection: TextDirection.rtl,
+                  hintStyle: TextStyle(color: Colors.grey,fontFamily: 'Cairo'),
+                  suffixIcon: Icon(Icons.search, color: Colors.grey),
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
@@ -109,6 +106,20 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+            // Category Pills
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _buildCategoryPill('منزل', false),
+                  _buildCategoryPill('فيلا', false),
+                  _buildCategoryPill('شقة', false),
+                  _buildCategoryPill('الكل', true),
+                ],
+              ),
+            ),
+
             const SizedBox(
               height: 15,
             ),
@@ -139,4 +150,24 @@ class _HomePageState extends State<HomePage> {
     isLoading = false;
     setState(() {});
   }
+}
+
+Widget _buildCategoryPill(String text, bool isSelected) {
+  return Container(
+    margin: const EdgeInsets.only(right: 7),
+    padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
+    decoration: BoxDecoration(
+      color: isSelected ? Color(0xff052659) : Colors.white,
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(
+          color: isSelected ? Color(0xff052659)! : Colors.grey[300]!),
+    ),
+    child: Text(
+      text,
+      style: TextStyle(
+          color: isSelected ? Colors.white : Colors.grey[600],
+          fontWeight: FontWeight.w500,
+          fontFamily: "Cairo"),
+    ),
+  );
 }

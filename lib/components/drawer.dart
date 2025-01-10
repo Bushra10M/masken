@@ -1,13 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:masken/components/my_list_tile.dart';
 
 class MyDrawer extends StatelessWidget {
-  final void Function()? onSignOut;
-  const MyDrawer({super.key,required this.onSignOut });
+ 
+   MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Drawer(
+    return Drawer(
       backgroundColor: Colors.white,
       child: Column(
         children: [
@@ -18,21 +20,16 @@ class MyDrawer extends StatelessWidget {
               size: 80,
             ),
           ),
-          
           MyListTile(
             icon: Icons.home,
-             text: "الصفحة الرئيسية",
-             onTap: () => Navigator.pop(context),
-             ),
-
-
-
+            text: "الصفحة الرئيسية",
+            onTap: () => Navigator.pop(context),
+          ),
           MyListTile(
             icon: Icons.power_settings_new,
-             text: "تسجيل الخروج",
-             onTap: onSignOut,
-             ),
-
+            text: "تسجيل الخروج",
+            onTap:(){}
+          ),
         ],
       ),
     );
