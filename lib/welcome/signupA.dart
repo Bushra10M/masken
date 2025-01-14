@@ -53,28 +53,53 @@ class _SignupaState extends State<Signupa> {
             .createUserWithEmailAndPassword(
                 email: emailController.text.trim(),
                 password: passwordController.text.trim());
-        addUser(userModel: userModel);
-        //pop loading circle
-        Navigator.pop(context);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Login()));
-      } on FirebaseAuthException catch (e) {
-        Navigator.pop(context);
-        displayMessageTouser(e.code, context);
+
+       if (userCredential != null) {
+        // الحصول على userId من Firebase Authentication بعد التسجيل الناجح
+        String userId = userCredential.user!.uid;
+
+        // بناء نموذج المستخدم مع userId
+        final UserModel userModel = UserModel(
+          userId: userId,  // تعيين userId من FirebaseAuth
+          email: emailController.text.trim(),
+          location: locationController.text.trim(), // المكان يمكن أن يتم تحديده لاحقًا
+          name: agencynameController.text.trim(),
+          phoneNumber: phoneNumController.text.trim(),
+        );
+
+        // إضافة بيانات المستخدم إلى Firestore باستخدام الـ userId
+        bool success = await addUser(usermodel: userModel);
+
+        if (success) {
+          // إذا تم إضافة البيانات بنجاح، انتقل إلى شاشة تسجيل الدخول
+          Navigator.pop(context);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Login()));
+        } else {
+          // إذا فشل إضافة البيانات
+          Navigator.pop(context);
+          displayMessageTouser('Failed to add user data to Firestore', context);
+        }
       }
+    } on FirebaseAuthException catch (e) {
+      // في حالة حدوث خطأ أثناء التسجيل
+      Navigator.pop(context);
+      displayMessageTouser(e.code, context);
     }
   }
+}
 
-  Future<bool> addUser({required UserModel userModel}) async {
+ Future<bool> addUser({required UserModel usermodel}) async {
     try {
       final FirebaseFirestore fireStore = FirebaseFirestore.instance;
-      await fireStore.collection('agency').add(userModel.toJson());
+    // await fireStore.collection('Agency').add(usermodel.toJson());
+       await fireStore.collection('agency').doc(usermodel.userId).set(usermodel.toJson());
       return true;
     } catch (e) {
       return false;
     }
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

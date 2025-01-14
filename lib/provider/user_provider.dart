@@ -11,6 +11,7 @@ Future<String?> getCurrentUserId() async {
     return null;
   }
 }
+
 Future<UserModel?> getUserData() async {
   try {
     String? userId = await getCurrentUserId(); // جلب userId من FirebaseAuth
@@ -18,17 +19,31 @@ Future<UserModel?> getUserData() async {
       return null; // إذا لم يكن المستخدم مسجل الدخول
     }
 
-    // جلب بيانات المستخدم من Firestore باستخدام userId
-    DocumentSnapshot userDoc = await FirebaseFirestore.instance
-        .collection('clients') // اسم المجموعة
-        .doc(userId) // معرف المستخدم
+    // جلب البيانات من المجموعتين
+    // المحاولة الأولى: clients
+    DocumentSnapshot clientDoc = await FirebaseFirestore.instance
+        .collection('clients')
+        .doc(userId)
         .get();
 
-    if (userDoc.exists) {
-      return UserModel.fromJson(userDoc.data() as Map<String, dynamic>);
-    } else {
-      return null; // إذا لم يتم العثور على بيانات للمستخدم
+    if (clientDoc.exists) {
+      // إذا تم العثور على المستخدم في clients
+      return UserModel.fromJson(clientDoc.data() as Map<String, dynamic>);
     }
+
+    // المحاولة الثانية: agencies
+    DocumentSnapshot agencyDoc = await FirebaseFirestore.instance
+        .collection('agency')
+        .doc(userId)
+        .get();
+
+    if (agencyDoc.exists) {
+      // إذا تم العثور على المستخدم في agencies
+      return UserModel.fromJson(agencyDoc.data() as Map<String, dynamic>);
+    }
+
+    // إذا لم يتم العثور على المستخدم في أي من المجموعتين
+    return null;
   } catch (e) {
     print('Error fetching user data: $e');
     return null;
