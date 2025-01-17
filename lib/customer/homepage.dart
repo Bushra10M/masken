@@ -112,9 +112,9 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildCategoryPill('منزل', false),
-                  _buildCategoryPill('فيلا', false),
-                  _buildCategoryPill('شقة', false),
+                  _buildCategoryPill('للبيع', false),
+                  _buildCategoryPill('للإيجار', false),
+                  
                   _buildCategoryPill('الكل', true),
                 ],
               ),
