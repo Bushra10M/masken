@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:masken/agency/agency_home.dart';
+import 'package:masken/agency/navbar.dart';
 import 'package:masken/components/mytextfield.dart';
 import 'package:masken/components/fixedbackground.dart';
 import 'package:masken/customer/homepage.dart';
+import 'package:masken/customer/nav_bar.dart';
 import 'package:masken/models/user_model.dart';
 
 class Login extends StatelessWidget {
@@ -23,7 +24,7 @@ class Login extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => const AgencyHome()));
       } else if (user == 2) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) =>  const HomePage()));
+            context, MaterialPageRoute(builder: (context) =>  const NavBarC()));
         print('He is not an agency');
       } else {
         print('caanot login');

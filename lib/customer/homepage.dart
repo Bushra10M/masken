@@ -29,47 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(
-        
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        actions: [
-          Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ClientProfile()));
-                },
-                icon: const Icon(color: Color(0xff052659), Icons.person),
-              ))
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 25,
-        backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xff052659),
-        elevation: 0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.sms),
-            label: '',
-          )
-        ],
-      ),
+     
       body: SafeArea(
         child: Column(
           children: [

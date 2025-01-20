@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:masken/agency/add_property.dart';
 import 'package:masken/agency/agencyprofile.dart';
+import 'package:masken/agency/agencyhome.dart';
 import 'package:masken/components/drawer.dart';
 import 'package:masken/agency/sms.dart'; // صفحة الرسائل
 
@@ -15,16 +16,7 @@ class _AgencyHomeState extends State<AgencyHome> {
   int currentIndex = 0;
 
   final List<Widget> pages = [
-    Center(
-      child: Text(
-        "الصفحة الرئيسية",
-        style: TextStyle(
-          fontSize: 20,
-          fontFamily: 'Cairo',
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
+    const Home(),
     const AddPropertyScreen(),
     const Sms(),
   ];
