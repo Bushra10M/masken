@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:masken/components/mytextfield.dart';
 class AddPropertyScreen extends StatefulWidget {
-  const AddPropertyScreen({Key? key}) : super(key: key);
+  const AddPropertyScreen({super.key});
 
   @override
   _AddPropertyScreenState createState() => _AddPropertyScreenState();
@@ -98,7 +98,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
-                  backgroundColor: Color(0xff052659),
+                  backgroundColor: const Color(0xff052659),
                 ),
                 child: const Text(
                   'إضافة العقار',

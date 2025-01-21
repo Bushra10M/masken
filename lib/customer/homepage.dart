@@ -1,14 +1,7 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:masken/components/drawer.dart';
-import 'package:masken/customer/favorite.dart';
 import 'package:masken/customer/propertycard.dart';
 import 'package:masken/models/property_model.dart';
 import 'package:masken/provider/property_provider.dart';
-import 'profilec.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,18 +11,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<PropertyModel> properties = [];
-  bool isLoading = true;
+  List<PropertyModel> properties = []; // جميع العقارات
+  List<PropertyModel> filteredProperties = []; // العقارات المصفاة للعرض
+  bool isLoading = true; // حالة التحميل
+  String searchQuery = ''; // النص المدخل في البحث
 
   @override
   void initState() {
-    getData();
+    getData(); // جلب العقارات عند تشغيل الصفحة
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: SafeArea(
         child: Column(
           children: [
@@ -45,18 +40,22 @@ class _HomePageState extends State<HomePage> {
                     color: Color(0xff052659)),
               ),
             ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            // search bar
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+            const SizedBox(height: 20.0),
+            // حقل البحث
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
                 textDirection: TextDirection.rtl,
-                decoration: InputDecoration(
+                onChanged: (value) {
+                  setState(() {
+                    searchQuery = value; // تحديث النص المدخل
+                    applySearch(); // تنفيذ البحث
+                  });
+                },
+                decoration: const InputDecoration(
                   hintText: 'ابحث هنا',
                   hintTextDirection: TextDirection.rtl,
-                  hintStyle: TextStyle(color: Colors.grey,fontFamily: 'Cairo'),
+                  hintStyle: TextStyle(color: Colors.grey, fontFamily: 'Cairo'),
                   suffixIcon: Icon(Icons.search, color: Colors.grey),
                   filled: true,
                   fillColor: Colors.white,
@@ -67,60 +66,92 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 20),
-            // Category Pills
+            // الأقسام
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
                   _buildCategoryPill('للبيع', false),
                   _buildCategoryPill('للإيجار', false),
-                  
                   _buildCategoryPill('الكل', true),
                 ],
               ),
             ),
-
-            const SizedBox(
-              height: 15,
-            ),
-
-            // property list
+            const SizedBox(height: 15),
+            // قائمة العقارات
             isLoading
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : Expanded(
-                    child: ListView.builder(
-                        itemCount: properties.length,
-                        itemBuilder: (context, index) {
-                          return Propertycard(
-                            propertyModel: properties[index],
-                          );
-                        })),
+                : filteredProperties.isEmpty
+                    ? const Center(
+                        child: Text(
+                          "لا توجد عقارات مطابقة للبحث",
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(fontFamily: "Cairo"),
+                        ),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                          itemCount: filteredProperties.length,
+                          itemBuilder: (context, index) {
+                            return Propertycard(
+                              propertyModel: filteredProperties[index],
+                            );
+                          },
+                        ),
+                      ),
           ],
         ),
       ),
     );
   }
 
+  // جلب العقارات من المصدر
   Future<void> getData() async {
     isLoading = true;
     setState(() {});
-    properties = await fetchProperties();
+    properties = await fetchProperties(); // جلب جميع العقارات
+    filteredProperties = properties; // عرض جميع العقارات مبدئيًا
     isLoading = false;
     setState(() {});
   }
+
+  // تنفيذ البحث
+   // تنفيذ البحث
+  void applySearch() {
+    setState(() {
+      if (searchQuery.isEmpty) {
+        filteredProperties = properties; // عرض جميع العقارات إذا كان البحث فارغًا
+      } else {
+        filteredProperties = properties.where((property) {
+          final searchText = searchQuery.toLowerCase();
+
+          final matchesLocation =
+              property.location.toLowerCase().contains(searchText); // البحث في الموقع
+          final matchesType =
+              property.type.toLowerCase().contains(searchText); // البحث في النوع
+          final matchesPrice = property.price
+              .toString()
+              .contains(searchText); // البحث في السعر كنص
+
+          return matchesLocation || matchesType || matchesPrice;
+        }).toList();
+      }
+    });
+  }
 }
 
+// ويدجت التصميم للأقسام
 Widget _buildCategoryPill(String text, bool isSelected) {
   return Container(
     margin: const EdgeInsets.only(right: 7),
     padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
     decoration: BoxDecoration(
-      color: isSelected ? Color(0xff052659) : Colors.white,
+      color: isSelected ? const Color(0xff052659) : Colors.white,
       borderRadius: BorderRadius.circular(10),
       border: Border.all(
-          color: isSelected ? Color(0xff052659)! : Colors.grey[300]!),
+          color: isSelected ? const Color(0xff052659) : Colors.grey[300]!),
     ),
     child: Text(
       text,

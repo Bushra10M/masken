@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:masken/agency/add_property.dart';
 import 'package:masken/agency/agencyprofile.dart';
-import 'package:masken/agency/agencyhome.dart';
 import 'package:masken/components/drawer.dart';
-import 'package:masken/agency/sms.dart';
 import 'package:masken/customer/favorite.dart';
 import 'package:masken/customer/homepage.dart';
 import 'package:masken/customer/message.dart'; // صفحة الرسائل
@@ -39,7 +36,8 @@ class _NavBarState extends State<NavBarC> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Agencyprofile()),
+                  MaterialPageRoute(
+                      builder: (context) => const Agencyprofile()),
                 );
               },
               icon: const Icon(color: Color(0xff052659), Icons.person),
@@ -48,22 +46,22 @@ class _NavBarState extends State<NavBarC> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-       currentIndex: currentIndex,
-  iconSize: 25,
-  backgroundColor: Colors.white,
-  selectedItemColor: const Color(0xff052659),
-  unselectedItemColor: Colors.grey,
-  elevation: 0,
-  selectedLabelStyle: const TextStyle(
-    fontFamily: 'Cairo',
-    fontWeight: FontWeight.bold,
-    fontSize: 14,
-  ),
-  unselectedLabelStyle: const TextStyle(
-    fontFamily: 'Cairo',
-    fontWeight: FontWeight.normal,
-    fontSize: 12,
-  ),
+        currentIndex: currentIndex,
+        iconSize: 25,
+        backgroundColor: Colors.white,
+        selectedItemColor: const Color(0xff052659),
+        unselectedItemColor: Colors.grey,
+        elevation: 0,
+        selectedLabelStyle: const TextStyle(
+          fontFamily: 'Cairo',
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+        ),
+        unselectedLabelStyle: const TextStyle(
+          fontFamily: 'Cairo',
+          fontWeight: FontWeight.normal,
+          fontSize: 12,
+        ),
         onTap: (index) {
           setState(() {
             currentIndex = index;

@@ -43,7 +43,7 @@ class Propertycard extends StatelessWidget {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
+                  const Icon(
                     color: Color(0xff052659),
                     Icons.favorite_border,
                     size: 30,
@@ -86,10 +86,10 @@ class Propertycard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Cairo'),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.location_on_outlined,
                         color: Colors.grey,
                         size: 20,

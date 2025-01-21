@@ -5,7 +5,7 @@ import 'package:masken/components/my_list_tile.dart';
 
 class MyDrawer extends StatelessWidget {
  
-   MyDrawer({super.key});
+   const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {

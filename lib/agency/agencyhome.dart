@@ -9,6 +9,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Center(child: Scaffold(body: Text("home page"),)));
+    return const SafeArea(child: Center(child: Scaffold(body: Text("home page"),)));
   }
 }
