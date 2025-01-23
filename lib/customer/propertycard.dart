@@ -35,12 +35,9 @@ class Propertycard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.amber,
                     borderRadius: BorderRadius.circular(12),
-                    // إضافة الصورة هنا:
-                    // image: DecorationImage(
-                    //   image: NetworkImage(propertyModel.imageUrl),
-                    //   fit: BoxFit.cover,
-                    // ),
                   ),
+                  child: Image.network(propertyModel.imageUrl),
+                  
                 ),
                 Positioned(
                   top: 15,

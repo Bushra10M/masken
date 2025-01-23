@@ -5,7 +5,7 @@ class PropertyModel {
   final String price;
   final String status;
   final String description;
-  final String agencyname;
+  final String agencyid;
   final String imageUrl;
   PropertyModel({
     required this.title,
@@ -14,7 +14,7 @@ class PropertyModel {
     required this.price,
     required this.status,
     required this.description,
-    required this.agencyname,
+    required this.agencyid,
     required this.imageUrl,
   });
   PropertyModel.fromJson(Map<String, dynamic> data)
@@ -24,7 +24,7 @@ class PropertyModel {
         price = data['price'] ?? '',
         status = data['status'] ?? '',
         description = data['description'] ?? '',
-        agencyname = data['agencyname'] ?? '',
+        agencyid = data['agencyid'] ?? '',
         imageUrl = data['imageUrl'];
   Map<String, dynamic> toJson() => {
         'title': title,
@@ -33,7 +33,7 @@ class PropertyModel {
         'price': price,
         'status': status,
         'description': description,
-        'agencyname': agencyname,
+        'agencyId': agencyid,
         'imageUrl': imageUrl,
       };
 }

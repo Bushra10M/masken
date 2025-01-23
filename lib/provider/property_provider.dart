@@ -18,7 +18,7 @@ Future<List<PropertyModel>> fetchProperties() async {
           price: data['price'] ?? '',
           status: data['status'] ?? '',
           description: data['description'] ?? '',
-          agencyname: data['agencyname'] ?? '',
+          agencyid: data['agencyid'] ?? '',
           imageUrl: data['imageUrl'] ?? '',
         ),
       );

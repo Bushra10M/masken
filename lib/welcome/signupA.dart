@@ -62,7 +62,7 @@ class _SignupaState extends State<Signupa> {
         final UserModel userModel = UserModel(
           userId: userId,  // تعيين userId من FirebaseAuth
           email: emailController.text.trim(),
-          location: locationController.text.trim(), // المكان يمكن أن يتم تحديده لاحقًا
+          location: locationController.text.trim(), 
           name: agencynameController.text.trim(),
           phoneNumber: phoneNumController.text.trim(),
         );

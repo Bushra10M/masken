@@ -14,15 +14,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<PropertyModel> properties = []; // جميع العقارات
-  List<PropertyModel> filteredProperties = []; // العقارات المصفاة للعرض
-  bool isLoading = true; // حالة التحميل
-  String searchQuery = ''; // النص المدخل في البحث
+  List<PropertyModel> properties = []; 
+  List<PropertyModel> filteredProperties = [];
+  bool isLoading = true; 
+  String searchQuery = ''; 
   String selectedCategory = 'الكل'; // الفئة المختارة (الكل، للبيع، للإيجار)
 
   @override
   void initState() {
-    getData(); // جلب العقارات عند تشغيل الصفحة
+    getData(); // 
     super.initState();
   }
 
