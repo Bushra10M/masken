@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:masken/customer/propertycard.dart';
+// استيراد النموذج الخاص بالعقار
 import 'package:masken/models/property_model.dart';
+// استيراد الويدجت الخاص ببطاقة العقار
+import 'package:masken/customer/propertycard.dart';
+// استيراد البروفايدر لجلب البيانات
 import 'package:masken/provider/property_provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   List<PropertyModel> filteredProperties = []; // العقارات المصفاة للعرض
   bool isLoading = true; // حالة التحميل
   String searchQuery = ''; // النص المدخل في البحث
+  String selectedCategory = 'الكل'; // الفئة المختارة (الكل، للبيع، للإيجار)
 
   @override
   void initState() {
@@ -71,9 +75,9 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildCategoryPill('للبيع', false),
-                  _buildCategoryPill('للإيجار', false),
-                  _buildCategoryPill('الكل', true),
+                  _buildCategoryPill('للبيع', selectedCategory == 'للبيع'),
+                  _buildCategoryPill('للإيجار', selectedCategory == 'للإيجار'),
+                  _buildCategoryPill('الكل', selectedCategory == 'الكل'),
                 ],
               ),
             ),
@@ -112,53 +116,71 @@ class _HomePageState extends State<HomePage> {
     isLoading = true;
     setState(() {});
     properties = await fetchProperties(); // جلب جميع العقارات
-    filteredProperties = properties; // عرض جميع العقارات مبدئيًا
+    applySearch(); // تصفية العقارات بناءً على البحث والفئة
     isLoading = false;
     setState(() {});
   }
 
-  // تنفيذ البحث
-   // تنفيذ البحث
+  // تنفيذ البحث والتصفية بناءً على الفئة
   void applySearch() {
     setState(() {
-      if (searchQuery.isEmpty) {
-        filteredProperties = properties; // عرض جميع العقارات إذا كان البحث فارغًا
+      List<PropertyModel> filteredByCategory;
+      if (selectedCategory == 'الكل') {
+        filteredByCategory = properties; // عرض الجميع
       } else {
-        filteredProperties = properties.where((property) {
+        filteredByCategory = properties
+            .where((property) => property.status == selectedCategory)
+            .toList();
+      }
+
+      if (searchQuery.isEmpty) {
+        filteredProperties = filteredByCategory;
+      } else {
+        filteredProperties = filteredByCategory.where((property) {
           final searchText = searchQuery.toLowerCase();
 
-          final matchesLocation =
-              property.location.toLowerCase().contains(searchText); // البحث في الموقع
-          final matchesType =
-              property.type.toLowerCase().contains(searchText); // البحث في النوع
+          final matchesLocation = property.location
+              .toLowerCase()
+              .contains(searchText); // البحث في الموقع
+          final matchesStatus = property.status
+              .toLowerCase()
+              .contains(searchText); // البحث في الحالة
           final matchesPrice = property.price
               .toString()
               .contains(searchText); // البحث في السعر كنص
 
-          return matchesLocation || matchesType || matchesPrice;
+          return matchesLocation || matchesStatus || matchesPrice;
         }).toList();
       }
     });
   }
-}
 
-// ويدجت التصميم للأقسام
-Widget _buildCategoryPill(String text, bool isSelected) {
-  return Container(
-    margin: const EdgeInsets.only(right: 7),
-    padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
-    decoration: BoxDecoration(
-      color: isSelected ? const Color(0xff052659) : Colors.white,
-      borderRadius: BorderRadius.circular(10),
-      border: Border.all(
-          color: isSelected ? const Color(0xff052659) : Colors.grey[300]!),
-    ),
-    child: Text(
-      text,
-      style: TextStyle(
-          color: isSelected ? Colors.white : Colors.grey[600],
-          fontWeight: FontWeight.w500,
-          fontFamily: "Cairo"),
-    ),
-  );
+  // ويدجت التصميم للأقسام
+  Widget _buildCategoryPill(String text, bool isSelected) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedCategory = text; // تحديث الفئة المختارة
+          applySearch(); // تطبيق الفلترة
+        });
+      },
+      child: Container(
+        margin: const EdgeInsets.only(right: 7),
+        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xff052659) : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+              color: isSelected ? const Color(0xff052659) : Colors.grey[300]!),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey[600],
+              fontWeight: FontWeight.w500,
+              fontFamily: "Cairo"),
+        ),
+      ),
+    );
+  }
 }

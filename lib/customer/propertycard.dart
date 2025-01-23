@@ -24,45 +24,72 @@ class Propertycard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 200,
-              margin: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(12),
-                // image: const DecorationImage(
-                //   image: NetworkImage(''),
-                //   fit: BoxFit.cover,
-                // ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25),
-              child: Row(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Icon(
-                    color: Color(0xff052659),
-                    Icons.favorite_border,
-                    size: 30,
+            // الصورة وعلامة المفضلة
+            Stack(
+              children: [
+                Container(
+                  height: 200,
+                  margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(12),
+                    // إضافة الصورة هنا:
+                    // image: DecorationImage(
+                    //   image: NetworkImage(propertyModel.imageUrl),
+                    //   fit: BoxFit.cover,
+                    // ),
                   ),
-                  Text(
+                ),
+                Positioned(
+                  top: 15,
+                  left: 15, // العلامة في الجهة العلوية اليسرى
+                  child: Container(
+                    width: 25, // حجم الدائرة
+                    height: 25,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.5), // تقليل الشفافية
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      padding: EdgeInsets.zero, // إزالة المسافات حول الأيقونة
+                      icon: const Icon(
+                        Icons.favorite_border,
+                        color: Color(0xff052659),
+                        size: 16, // حجم الأيقونة
+                      ),
+                      onPressed: () {
+                        // وظيفة عند الضغط على علامة المفضلة
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // اسم العقار أسفل الصورة في الجهة اليمنى
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, top: 5),
+                  child: Text(
                     propertyModel.title,
                     textDirection: TextDirection.rtl,
                     style: const TextStyle(
-                        color: Color(0xff052659),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Cairo'),
+                      color: Color(0xff052659),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Cairo',
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            //  const SizedBox(height: 10),
+            const SizedBox(height: 10),
+            // السعر والموقع
             Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -70,10 +97,11 @@ class Propertycard extends StatelessWidget {
                     propertyModel.price,
                     textDirection: TextDirection.rtl,
                     style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Cairo'),
+                      color: Colors.grey,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Cairo',
+                    ),
                   ),
                   Row(
                     children: [
@@ -81,14 +109,13 @@ class Propertycard extends StatelessWidget {
                         propertyModel.location,
                         textDirection: TextDirection.rtl,
                         style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Cairo'),
+                          color: Colors.grey,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Cairo',
+                        ),
                       ),
-                      const SizedBox(
-                        width: 8,
-                      ),
+                      const SizedBox(width: 8),
                       const Icon(
                         Icons.location_on_outlined,
                         color: Colors.grey,
