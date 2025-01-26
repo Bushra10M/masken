@@ -1,4 +1,5 @@
 class PropertyModel {
+ // معرف العقار
   final String title;
   final String location;
   final String type;
@@ -7,7 +8,9 @@ class PropertyModel {
   final String description;
   final String agencyid;
   final String imageUrl;
+
   PropertyModel({
+   
     required this.title,
     required this.location,
     required this.type,
@@ -17,16 +20,20 @@ class PropertyModel {
     required this.agencyid,
     required this.imageUrl,
   });
+
   PropertyModel.fromJson(Map<String, dynamic> data)
-      : title = data['title'] ?? '',
+      : 
+        title = data['title'] ?? '',
         location = data['location'] ?? '',
         type = data['type'] ?? '',
         price = data['price'] ?? '',
         status = data['status'] ?? '',
         description = data['description'] ?? '',
         agencyid = data['agencyid'] ?? '',
-        imageUrl = data['imageUrl'];
+        imageUrl = data['imageUrl'] ?? '';
+
   Map<String, dynamic> toJson() => {
+   
         'title': title,
         'location': location,
         'type': type,

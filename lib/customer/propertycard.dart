@@ -1,129 +1,149 @@
 import 'package:flutter/material.dart';
+import 'package:masken/customer/favorite.dart';
+
 import 'package:masken/models/property_model.dart';
 
-class Propertycard extends StatelessWidget {
+class Propertycard extends StatefulWidget {
   final PropertyModel propertyModel;
 
   const Propertycard({super.key, required this.propertyModel});
 
   @override
+  _PropertycardState createState() => _PropertycardState();
+}
+
+class _PropertycardState extends State<Propertycard> {
+  bool isFavorite = false;
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Container(
-        height: 300,
         decoration: BoxDecoration(
-          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.shade400,
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: const Offset(0, 3)),
+              color: Colors.grey.shade300,
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
           ],
-          borderRadius: BorderRadius.circular(12),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // الصورة وعلامة المفضلة
-            Stack(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Card(
+            elevation: 0,
+            margin: EdgeInsets.zero,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  height: 200,
-                  margin: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Image.network(propertyModel.imageUrl),
-                  
-                ),
-                Positioned(
-                  top: 15,
-                  left: 15, // العلامة في الجهة العلوية اليسرى
-                  child: Container(
-                    width: 25, // حجم الدائرة
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5), // تقليل الشفافية
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      padding: EdgeInsets.zero, // إزالة المسافات حول الأيقونة
-                      icon: const Icon(
-                        Icons.favorite_border,
-                        color: Color(0xff052659),
-                        size: 16, // حجم الأيقونة
-                      ),
-                      onPressed: () {
-                        // وظيفة عند الضغط على علامة المفضلة
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            // اسم العقار أسفل الصورة في الجهة اليمنى
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 20, top: 5),
-                  child: Text(
-                    propertyModel.title,
-                    textDirection: TextDirection.rtl,
-                    style: const TextStyle(
-                      color: Color(0xff052659),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Cairo',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            // السعر والموقع
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    propertyModel.price,
-                    textDirection: TextDirection.rtl,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Cairo',
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        propertyModel.location,
-                        textDirection: TextDirection.rtl,
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Cairo',
+                // Image with gradient and favorite button
+                Stack(
+                  children: [
+                    // Property Image with Gradient
+                    Container(
+                      height: 250,
+                      decoration: BoxDecoration(
+                          // image: DecorationImage(
+                          // image: NetworkImage(widget.propertyModel.imageUrl),
+                          //fit: BoxFit.cover,
+                          // ),
+                          ),
+                      foregroundDecoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.7),
+                          ],
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      const Icon(
-                        Icons.location_on_outlined,
-                        color: Colors.grey,
-                        size: 20,
+                    ),
+                    // Favorite Button
+                    Positioned(
+                      top: 16,
+                      right: 16,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white.withOpacity(0.8),
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: isFavorite
+                                ? Colors.red
+                                : const Color(0xff052659),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isFavorite = !isFavorite;
+                            });
+                          
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                // Property Details
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        widget.propertyModel.title,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Cairo',
+                          color: Color(0xff052659),
+                        ),
+                        textAlign: TextAlign.right,
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.propertyModel.price,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Cairo',
+                              color: Colors.green,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                widget.propertyModel.location,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Cairo',
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              const Icon(
+                                Icons.location_on,
+                                color: Colors.grey,
+                                size: 20,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
