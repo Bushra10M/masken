@@ -3,7 +3,8 @@ import 'package:masken/agency/agencyprofile.dart';
 import 'package:masken/components/drawer.dart';
 import 'package:masken/customer/favorite.dart';
 import 'package:masken/customer/homepage.dart';
-import 'package:masken/customer/message.dart'; // صفحة الرسائل
+import 'package:masken/customer/message.dart';
+import 'package:masken/customer/profilec.dart'; // صفحة الرسائل
 
 class NavBarC extends StatefulWidget {
   const NavBarC({super.key});
@@ -37,7 +38,7 @@ class _NavBarState extends State<NavBarC> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const Agencyprofile()),
+                      builder: (context) => const ClientProfile()),
                 );
               },
               icon: const Icon(color: Color(0xff052659), Icons.person),

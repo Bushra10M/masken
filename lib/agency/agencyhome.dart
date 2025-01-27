@@ -26,20 +26,24 @@ class _HomeState extends State<Home> {
   @override
 Widget build(BuildContext context) {
   return SafeArea(
-    child: isLoading
-        ? Center(child: CircularProgressIndicator()) // عرض مؤشر تحميل
-        : filteredProperties.isEmpty
-            ? Center(child: Text('لا توجد عقارات متاحة للعرض'))
-            : Expanded(
-                child: ListView.builder(
-                  itemCount: filteredProperties.length,
-                  itemBuilder: (context, index) {
-                    return Propertycard(
-                      propertyModel: filteredProperties[index],
-                    );
-                  },
-                ),
-              ),
+    child: Column(
+      children: [
+        isLoading
+            ? Center(child: CircularProgressIndicator()) // عرض مؤشر تحميل
+            : filteredProperties.isEmpty
+                ? Center(child: Text('لا توجد عقارات متاحة للعرض'))
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: filteredProperties.length,
+                      itemBuilder: (context, index) {
+                        return Propertycard(
+                          propertyModel: filteredProperties[index],
+                        );
+                      },
+                    ),
+                  ),
+      ],
+    ),
   );
 }
 

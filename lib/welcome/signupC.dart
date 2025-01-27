@@ -127,6 +127,7 @@ class _SignupcState extends State<Signupc> {
                   MyTextField(
                       controller: usernameController,
                       hintText: "أسم المستخدم",
+                        icon: Icons.person_outlined,
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
@@ -135,6 +136,7 @@ class _SignupcState extends State<Signupc> {
                   MyTextField(
                       controller: phoneNumberController,
                       hintText: "رقم الهاتف",
+                        icon: Icons.phone_outlined,
                       obscureText: false),
                       const SizedBox(
                     height: 15.0,
@@ -142,6 +144,7 @@ class _SignupcState extends State<Signupc> {
                   MyTextField(
                       controller: emailController,
                       hintText: "البريد الالكتروني",
+                       icon: Icons.email_outlined,
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
@@ -149,6 +152,7 @@ class _SignupcState extends State<Signupc> {
                   MyTextField(
                       controller: passwordController,
                       hintText: "كلمة المرور",
+                        icon: Icons.lock_outline,
                       obscureText: true),
                   const SizedBox(
                     height: 15.0,
@@ -156,6 +160,7 @@ class _SignupcState extends State<Signupc> {
                   MyTextField(
                       controller: confirmpasswordController,
                       hintText: "تأكيد كلمة المرور",
+                       icon: Icons.lock_reset_rounded,
                       obscureText: true),
                   const SizedBox(
                     height: 20.0,

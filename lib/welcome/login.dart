@@ -61,6 +61,7 @@ class Login extends StatelessWidget {
                   MyTextField(
                       controller: usernameController,
                       hintText: "البريد الالكتروني",
+                       icon: Icons.email_outlined,
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
@@ -68,6 +69,7 @@ class Login extends StatelessWidget {
                   MyTextField(
                       controller: passwordController,
                       hintText: "كلمة المرور",
+                      icon: Icons.lock_open_outlined,
                       obscureText: true),
                   const SizedBox(
                     height: 20.0,

@@ -1,38 +1,51 @@
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
-  final controller;
-  final String hintText;
-  final bool obscureText;
-  const MyTextField({
-    super.key,
-    required this.controller,
-    required this.hintText,
-    required this.obscureText,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade400),
+Widget MyTextField({
+    required TextEditingController controller,
+    required String hintText,
+    required IconData icon,
+    required bool obscureText,
+    int maxLines = 1,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
           ),
-          fillColor: Colors.grey.shade200,
-          filled: true,
+        ],
+      ),
+      child: TextField(
+        obscureText: obscureText,
+        controller: controller,
+        maxLines: maxLines,
+        textDirection: TextDirection.rtl,
+        textAlign: TextAlign.right,
+        style: TextStyle(
+          fontFamily: 'Cairo',
+          color: const Color(0xff052659),
+        ),
+        decoration: InputDecoration(
           hintText: hintText,
-           hintTextDirection: TextDirection.rtl,
-          hintStyle: TextStyle(color: Colors.grey[400],
-          fontFamily: "Cairo"
-          )
+          hintStyle: TextStyle(
+            fontFamily: 'Cairo',
+            color: Colors.grey[500],
+          ),
+          suffixIcon: Icon(
+            icon,
+            color: const Color(0xff052659).withOpacity(0.7),
+          ),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 15,
+          ),
         ),
       ),
     );
   }
-}

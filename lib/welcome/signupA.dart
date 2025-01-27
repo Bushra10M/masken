@@ -128,14 +128,18 @@ class _SignupaState extends State<Signupa> {
                   ),
                   MyTextField(
                       controller: agencynameController,
-                      hintText: "أسم الوكالة العقارية",
-                      obscureText: false),
+                      hintText: "أسم الوكالة العقارية",  
+                      icon: Icons.person_outlined,
+                      obscureText: false,
+                   
+                      ),
                   const SizedBox(
                     height: 15.0,
                   ),
                   MyTextField(
                       controller: phoneNumController,
                       hintText: "رقم الهاتف",
+                      icon: Icons.phone_outlined,
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
@@ -143,6 +147,7 @@ class _SignupaState extends State<Signupa> {
                   MyTextField(
                       controller: locationController,
                       hintText: "موقع الوكالة",
+                      icon: Icons.location_on,
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
@@ -150,6 +155,7 @@ class _SignupaState extends State<Signupa> {
                   MyTextField(
                       controller: emailController,
                       hintText: "البريد الالكتروني",
+                      icon: Icons.email_outlined,
                       obscureText: false),
                   const SizedBox(
                     height: 15.0,
@@ -157,6 +163,7 @@ class _SignupaState extends State<Signupa> {
                   MyTextField(
                       controller: passwordController,
                       hintText: "كلمة المرور",
+                      icon: Icons.lock_outline,
                       obscureText: true),
                   const SizedBox(
                     height: 15.0,
@@ -164,6 +171,7 @@ class _SignupaState extends State<Signupa> {
                   MyTextField(
                       controller: confirmpasswordController,
                       hintText: "تأكيد كلمة المرور",
+                      icon: Icons.lock_reset_rounded,
                       obscureText: true),
                   const SizedBox(
                     height: 20.0,

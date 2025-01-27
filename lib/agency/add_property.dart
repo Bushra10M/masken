@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:masken/components/mytextfield.dart';
 
 class AddPropertyScreen extends StatefulWidget {
   const AddPropertyScreen({super.key});
@@ -107,154 +108,71 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              const Color(0xff052659),
-              const Color(0xff1A5F9F),
-              Colors.white,
-              Colors.white,
-            ],
-            stops: const [0.0, 0.2, 0.2, 1.0],
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text(
-                  'إضافة عقار جديد',
-                  style: TextStyle(
-                    fontFamily: 'Cairo',
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+      body:
 
-              // Main Content
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                  ),
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // Text Fields
-                        _buildTextField(
-                          controller: titleController,
-                          hintText: 'عنوان العقار *',
-                          icon: Icons.title,
-                        ),
-                        const SizedBox(height: 15),
-                        _buildTextField(
-                          controller: locationController,
-                          hintText: 'الموقع *',
-                          icon: Icons.location_on,
-                        ),
-                        const SizedBox(height: 15),
-                        _buildTextField(
-                          controller: typeController,
-                          hintText: 'نوع العقار',
-                          icon: Icons.home,
-                        ),
-                        const SizedBox(height: 15),
-                        _buildTextField(
-                          controller: priceController,
-                          hintText: 'السعر *',
-                          icon: Icons.attach_money,
-                        ),
-                        const SizedBox(height: 15),
-                        _buildTextField(
-                          controller: statusController,
-                          hintText: 'حالة العقار',
-                          icon: Icons.check_circle_outline,
-                        ),
-                        const SizedBox(height: 15),
-                        _buildTextField(
-                          controller: descriptionController,
-                          hintText: 'الوصف',
-                          icon: Icons.description,
-                          maxLines: 3,
-                        ),
+          // Main Content
 
-                        const SizedBox(height: 30),
+          SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _buildImageUploader(), // هنا إضافة العنصر
+            const SizedBox(height: 15),
+            // Text Fields
+            MyTextField(
+              controller: titleController,
+              hintText: 'عنوان العقار *',
+              icon: Icons.title,
+              obscureText: false,
+            ),
+            const SizedBox(height: 15),
+            MyTextField(
+              controller: locationController,
+              hintText: 'الموقع *',
+              icon: Icons.location_on,
+              obscureText: false,
+            ),
+            const SizedBox(height: 15),
+            MyTextField(
+              controller: typeController,
+              hintText: 'نوع العقار',
+              icon: Icons.home,
+              obscureText: false,
+            ),
+            const SizedBox(height: 15),
+            MyTextField(
+              controller: priceController,
+              hintText: 'السعر *',
+              icon: Icons.attach_money,
+              obscureText: false,
+            ),
+            const SizedBox(height: 15),
+            MyTextField(
+              controller: statusController,
+              hintText: 'حالة العقار',
+              icon: Icons.check_circle_outline,
+              obscureText: false,
+            ),
+            const SizedBox(height: 15),
+            MyTextField(
+              controller: descriptionController,
+              hintText: 'الوصف',
+              icon: Icons.description,
+              obscureText: false,
+            ),
 
-                        // Submit Button
-                        _buildSubmitButton(),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            const SizedBox(height: 30),
+
+            // Submit Button
+            _buildSubmitButton(),
+          ],
         ),
       ),
     );
   }
 
-  // Text Field with Modern Design
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String hintText,
-    required IconData icon,
-    int maxLines = 1,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: TextField(
-        controller: controller,
-        maxLines: maxLines,
-        textDirection: TextDirection.rtl,
-        textAlign: TextAlign.right,
-        style: TextStyle(
-          fontFamily: 'Cairo',
-          color: const Color(0xff052659),
-        ),
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: TextStyle(
-            fontFamily: 'Cairo',
-            color: Colors.grey[500],
-          ),
-          suffixIcon: Icon(
-            icon,
-            color: const Color(0xff052659).withOpacity(0.7),
-          ),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 15,
-          ),
-        ),
-      ),
-    );
-  }
+  
 
   // Submit Button
   Widget _buildSubmitButton() {
@@ -297,4 +215,55 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
       ),
     );
   }
+}
+
+Widget _buildImageUploader() {
+  return GestureDetector(
+    onTap: () {
+      // يمكنك إضافة وظيفة اختيار الصورة هنا لاحقًا
+    },
+    child: Container(
+      height: 200,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            const Color(0xff052659),
+            const Color(0xff1A5F9F),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          )
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.add_a_photo_outlined,
+            size: 50,
+            color: Colors.white.withOpacity(0.8),
+          ),
+          const SizedBox(height: 15),
+          Text(
+            'إضافة صورة',
+            style: TextStyle(
+              fontFamily: 'Cairo',
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
