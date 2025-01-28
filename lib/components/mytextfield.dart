@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 Widget MyTextField({
     required TextEditingController controller,
@@ -6,6 +7,8 @@ Widget MyTextField({
     required IconData icon,
     required bool obscureText,
     int maxLines = 1,
+   required TextInputType keyboardType,
+     required List<TextInputFormatter>? inputFormatters,
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -24,6 +27,8 @@ Widget MyTextField({
         obscureText: obscureText,
         controller: controller,
         maxLines: maxLines,
+        keyboardType: keyboardType,
+       inputFormatters:inputFormatters, 
         textDirection: TextDirection.rtl,
         textAlign: TextAlign.right,
         style: TextStyle(

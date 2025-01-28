@@ -27,11 +27,33 @@ class _HomeState extends State<Home> {
 Widget build(BuildContext context) {
   return SafeArea(
     child: Column(
-      children: [
+      children: [ AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
+              decoration: BoxDecoration(),
+              child: const Text(
+                "عقـاراتي",
+                textDirection: TextDirection.rtl,
+                style: TextStyle(
+                  fontFamily: "Cairo",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                  color: Color(0xff052659),
+                ),
+              ),
+            ),
+            SizedBox(height: 15,),
         isLoading
             ? Center(child: CircularProgressIndicator()) // عرض مؤشر تحميل
             : filteredProperties.isEmpty
-                ? Center(child: Text('لا توجد عقارات متاحة للعرض'))
+                ? Center(child: Text('لا توجد عقارات متاحة للعرض' , textDirection: TextDirection.rtl,
+                style: TextStyle(
+                  fontFamily: "Cairo",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                  color: Color(0xff052659),
+                ),))
                 : Expanded(
                     child: ListView.builder(
                       itemCount: filteredProperties.length,

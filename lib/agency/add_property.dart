@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:masken/components/mytextfield.dart';
 
 class AddPropertyScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
       }
 
       if (_validateInputs()) {
-        String agencyId = user.uid;
+        String agencyid = user.uid;
 
         await FirebaseFirestore.instance.collection('properties').add({
           'title': titleController.text,
@@ -39,7 +40,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
           'type': typeController.text,
           'status': statusController.text,
           'userId': user.uid,
-          'agencyId': agencyId,
+          'agencyid': agencyid,
           'createdAt': FieldValue.serverTimestamp(),
         });
 
@@ -54,7 +55,9 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   bool _validateInputs() {
     if (titleController.text.isEmpty ||
         locationController.text.isEmpty ||
-        priceController.text.isEmpty) {
+        priceController.text.isEmpty ||
+        statusController.text.isEmpty 
+        ) {
       _showErrorSnackBar('يرجى ملء الحقول الإلزامية');
       return false;
     }
@@ -122,16 +125,20 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
             // Text Fields
             MyTextField(
               controller: titleController,
-              hintText: 'عنوان العقار *',
+              hintText: ' * عنوان العقار',
               icon: Icons.title,
               obscureText: false,
+               keyboardType :TextInputType.text,
+                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
             ),
             const SizedBox(height: 15),
             MyTextField(
               controller: locationController,
-              hintText: 'الموقع *',
+              hintText: '* الموقع',
               icon: Icons.location_on,
               obscureText: false,
+               keyboardType :TextInputType.text,
+                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
             ),
             const SizedBox(height: 15),
             MyTextField(
@@ -139,20 +146,26 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
               hintText: 'نوع العقار',
               icon: Icons.home,
               obscureText: false,
+               keyboardType :TextInputType.text,
+                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
             ),
             const SizedBox(height: 15),
             MyTextField(
               controller: priceController,
-              hintText: 'السعر *',
+              hintText: '* السعر',
               icon: Icons.attach_money,
               obscureText: false,
+                keyboardType :TextInputType.number,
+                             inputFormatters:  [FilteringTextInputFormatter.digitsOnly]
             ),
             const SizedBox(height: 15),
             MyTextField(
               controller: statusController,
-              hintText: 'حالة العقار',
+              hintText: '* حالة العقار ( للإيجار ام للبيع )',
               icon: Icons.check_circle_outline,
               obscureText: false,
+               keyboardType :TextInputType.text,
+                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
             ),
             const SizedBox(height: 15),
             MyTextField(
@@ -160,6 +173,8 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
               hintText: 'الوصف',
               icon: Icons.description,
               obscureText: false,
+               keyboardType :TextInputType.text,
+                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
             ),
 
             const SizedBox(height: 30),

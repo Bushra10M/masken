@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:masken/agency/navbar.dart';
 import 'package:masken/components/mytextfield.dart';
 import 'package:masken/components/fixedbackground.dart';
@@ -62,7 +63,10 @@ class Login extends StatelessWidget {
                       controller: usernameController,
                       hintText: "البريد الالكتروني",
                        icon: Icons.email_outlined,
-                      obscureText: false),
+                      obscureText: false,
+                        keyboardType :TextInputType.text,
+                     inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z@#\-_!$%^&*(),.?":{}|<>/+=\s]'))]
+                      ),
                   const SizedBox(
                     height: 15.0,
                   ),
@@ -70,7 +74,10 @@ class Login extends StatelessWidget {
                       controller: passwordController,
                       hintText: "كلمة المرور",
                       icon: Icons.lock_open_outlined,
-                      obscureText: true),
+                      obscureText: true,
+                      keyboardType: TextInputType.number,
+                             inputFormatters:  [FilteringTextInputFormatter.digitsOnly]
+                      ),
                   const SizedBox(
                     height: 20.0,
                   ),

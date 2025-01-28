@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:masken/components/mytextfield.dart';
 import 'package:masken/components/fixedbackground.dart';
 import 'package:masken/models/user_model.dart';
@@ -128,7 +129,10 @@ class _SignupcState extends State<Signupc> {
                       controller: usernameController,
                       hintText: "أسم المستخدم",
                         icon: Icons.person_outlined,
-                      obscureText: false),
+                      obscureText: false,
+                         keyboardType:TextInputType.text,
+                      inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
+                      ),
                   const SizedBox(
                     height: 15.0,
                   ),
@@ -137,7 +141,10 @@ class _SignupcState extends State<Signupc> {
                       controller: phoneNumberController,
                       hintText: "رقم الهاتف",
                         icon: Icons.phone_outlined,
-                      obscureText: false),
+                      obscureText: false,
+                       keyboardType :TextInputType.number,
+                             inputFormatters:  [FilteringTextInputFormatter.digitsOnly]
+                      ),
                       const SizedBox(
                     height: 15.0,
                   ),
@@ -145,7 +152,10 @@ class _SignupcState extends State<Signupc> {
                       controller: emailController,
                       hintText: "البريد الالكتروني",
                        icon: Icons.email_outlined,
-                      obscureText: false),
+                      obscureText: false,
+                        keyboardType :TextInputType.text,
+                     inputFormatters: [ FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))]
+                     ),
                   const SizedBox(
                     height: 15.0,
                   ),
@@ -153,7 +163,10 @@ class _SignupcState extends State<Signupc> {
                       controller: passwordController,
                       hintText: "كلمة المرور",
                         icon: Icons.lock_outline,
-                      obscureText: true),
+                      obscureText: true,
+                       keyboardType :TextInputType.number,
+                             inputFormatters:  [FilteringTextInputFormatter.digitsOnly]
+                      ),
                   const SizedBox(
                     height: 15.0,
                   ),
@@ -161,7 +174,10 @@ class _SignupcState extends State<Signupc> {
                       controller: confirmpasswordController,
                       hintText: "تأكيد كلمة المرور",
                        icon: Icons.lock_reset_rounded,
-                      obscureText: true),
+                      obscureText: true,
+                       keyboardType :TextInputType.number,
+                             inputFormatters:  [FilteringTextInputFormatter.digitsOnly]
+                      ),
                   const SizedBox(
                     height: 20.0,
                   ),
