@@ -41,7 +41,7 @@ class ClientProfile extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.error_outline,
-                    color: Colors.white.withOpacity(0.7),
+                    color:  Color(0xff052659),
                     size: 80,
                   ),
                   const SizedBox(height: 16),
@@ -49,7 +49,7 @@ class ClientProfile extends StatelessWidget {
                     'حدث خطأ أثناء جلب البيانات',
                     style: TextStyle(
                       fontFamily: 'Cairo',
-                      color: Colors.white.withOpacity(0.8),
+                      color:  Color(0xff052659),
                       fontSize: 16,
                     ),
                   ),
@@ -63,7 +63,7 @@ class ClientProfile extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.person_off_outlined,
-                    color: Colors.white.withOpacity(0.6),
+                    color: Colors.grey,
                     size: 80,
                   ),
                   const SizedBox(height: 16),
@@ -71,7 +71,7 @@ class ClientProfile extends StatelessWidget {
                     'لا توجد بيانات للمستخدم',
                     style: TextStyle(
                       fontFamily: 'Cairo',
-                      color: Colors.white.withOpacity(0.7),
+                      color:Color(0xff052659),
                       fontSize: 16,
                     ),
                   ),

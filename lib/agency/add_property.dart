@@ -56,8 +56,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
     if (titleController.text.isEmpty ||
         locationController.text.isEmpty ||
         priceController.text.isEmpty ||
-        statusController.text.isEmpty 
-        ) {
+        statusController.text.isEmpty) {
       _showErrorSnackBar('يرجى ملء الحقول الإلزامية');
       return false;
     }
@@ -124,58 +123,62 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
             const SizedBox(height: 15),
             // Text Fields
             MyTextField(
-              controller: titleController,
-              hintText: ' * عنوان العقار',
-              icon: Icons.title,
-              obscureText: false,
-               keyboardType :TextInputType.text,
-                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
-            ),
+                controller: titleController,
+                hintText: ' * عنوان العقار',
+                icon: Icons.title,
+                obscureText: false,
+                keyboardType: TextInputType.text,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))
+                ]),
             const SizedBox(height: 15),
             MyTextField(
-              controller: locationController,
-              hintText: '* الموقع',
-              icon: Icons.location_on,
-              obscureText: false,
-               keyboardType :TextInputType.text,
-                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
-            ),
+                controller: locationController,
+                hintText: '* الموقع',
+                icon: Icons.location_on,
+                obscureText: false,
+                keyboardType: TextInputType.text,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))
+                ]),
             const SizedBox(height: 15),
             MyTextField(
-              controller: typeController,
-              hintText: 'نوع العقار',
-              icon: Icons.home,
-              obscureText: false,
-               keyboardType :TextInputType.text,
-                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
-            ),
+                controller: typeController,
+                hintText: 'نوع العقار',
+                icon: Icons.home,
+                obscureText: false,
+                keyboardType: TextInputType.text,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))
+                ]),
             const SizedBox(height: 15),
             MyTextField(
-              controller: priceController,
-              hintText: '* السعر',
-              icon: Icons.attach_money,
-              obscureText: false,
-                keyboardType :TextInputType.number,
-                             inputFormatters:  [FilteringTextInputFormatter.digitsOnly]
-            ),
+                controller: priceController,
+                hintText: '* السعر',
+                icon: Icons.attach_money,
+                obscureText: false,
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly]),
             const SizedBox(height: 15),
             MyTextField(
-              controller: statusController,
-              hintText: '* حالة العقار ( للإيجار ام للبيع )',
-              icon: Icons.check_circle_outline,
-              obscureText: false,
-               keyboardType :TextInputType.text,
-                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
-            ),
+                controller: statusController,
+                hintText: '* حالة العقار ( للإيجار ام للبيع )',
+                icon: Icons.check_circle_outline,
+                obscureText: false,
+                keyboardType: TextInputType.text,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))
+                ]),
             const SizedBox(height: 15),
             MyTextField(
-              controller: descriptionController,
-              hintText: 'الوصف',
-              icon: Icons.description,
-              obscureText: false,
-               keyboardType :TextInputType.text,
-                          inputFormatters:  [FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))]
-            ),
+                controller: descriptionController,
+                hintText: 'الوصف',
+                icon: Icons.description,
+                obscureText: false,
+                keyboardType: TextInputType.text,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))
+                ]),
 
             const SizedBox(height: 30),
 
@@ -186,8 +189,6 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
       ),
     );
   }
-
-  
 
   // Submit Button
   Widget _buildSubmitButton() {
