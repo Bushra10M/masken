@@ -16,7 +16,6 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   final TextEditingController locationController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController agencyNameController = TextEditingController();
   final TextEditingController typeController = TextEditingController();
   final TextEditingController statusController = TextEditingController();
 
@@ -29,18 +28,23 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
       }
 
       if (_validateInputs()) {
-        String agencyid = user.uid;
+        String agencyId = user.uid;
+        String propertyId =
+            FirebaseFirestore.instance.collection('properties').doc().id;
 
-        await FirebaseFirestore.instance.collection('properties').add({
+        await FirebaseFirestore.instance
+            .collection('properties')
+            .doc(propertyId)
+            .set({
+          'propertyId': propertyId, // تخزين الـ ID داخل المستند
           'title': titleController.text,
           'location': locationController.text,
           'price': priceController.text,
           'description': descriptionController.text,
-          'agencyName': agencyNameController.text,
           'type': typeController.text,
           'status': statusController.text,
           'userId': user.uid,
-          'agencyid': agencyid,
+          'agencyId': agencyId,
           'createdAt': FieldValue.serverTimestamp(),
         });
 
@@ -66,14 +70,10 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   void _showSuccessSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          message,
-          textAlign: TextAlign.right,
-          style: const TextStyle(
+        content: Text(message, textAlign: TextAlign.right,  style: const TextStyle(
             fontFamily: 'Cairo',
             color: Colors.white,
-          ),
-        ),
+          ),),
         backgroundColor: const Color(0xff052659),
         duration: const Duration(seconds: 2),
       ),
@@ -83,14 +83,10 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   void _showErrorSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          message,
-          textAlign: TextAlign.right,
-          style: const TextStyle(
+        content: Text(message, textAlign: TextAlign.right,  style: const TextStyle(
             fontFamily: 'Cairo',
             color: Colors.white,
-          ),
-        ),
+          ),),
         backgroundColor: Colors.red,
         duration: const Duration(seconds: 2),
       ),
@@ -102,7 +98,6 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
     locationController.clear();
     priceController.clear();
     descriptionController.clear();
-    agencyNameController.clear();
     typeController.clear();
     statusController.clear();
   }
@@ -110,18 +105,14 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-
-          // Main Content
-
-          SingleChildScrollView(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildImageUploader(), // هنا إضافة العنصر
             const SizedBox(height: 15),
-            // Text Fields
+            const SizedBox(height: 15),
             MyTextField(
                 controller: titleController,
                 hintText: ' * عنوان العقار',
@@ -131,6 +122,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'[ء-يa-zA-Z\s]'))
                 ]),
+
             const SizedBox(height: 15),
             MyTextField(
                 controller: locationController,
@@ -182,7 +174,6 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
 
             const SizedBox(height: 30),
 
-            // Submit Button
             _buildSubmitButton(),
           ],
         ),
@@ -190,15 +181,11 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
     );
   }
 
-  // Submit Button
   Widget _buildSubmitButton() {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            const Color(0xff052659),
-            const Color(0xff1A5F9F),
-          ],
+        gradient: const LinearGradient(
+          colors: [Color(0xff052659), Color(0xff1A5F9F)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -222,11 +209,10 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
         child: const Text(
           'إضافة العقار',
           style: TextStyle(
-            fontFamily: "Cairo",
-            fontSize: 18,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Cairo'),
         ),
       ),
     );

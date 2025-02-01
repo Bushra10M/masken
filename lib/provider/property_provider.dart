@@ -10,6 +10,7 @@ Future<List<PropertyModel>> fetchProperties() async {
     List<PropertyModel> properties = querySnapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
       return PropertyModel(
+        id: data['id'],
         title: data['title'] ?? '',
         location: data['location'] ?? '',
         type: data['type'] ?? '',

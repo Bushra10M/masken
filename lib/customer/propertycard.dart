@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:masken/customer/favorite.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:masken/agency/edit_property.dart';
 import 'package:masken/customer/propertydetail.dart';
-
 import 'package:masken/models/property_model.dart';
 
 class Propertycard extends StatefulWidget {
@@ -15,13 +16,16 @@ class Propertycard extends StatefulWidget {
 
 class _PropertycardState extends State<Propertycard> {
   bool isFavorite = false;
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
+    bool isOwner = user != null && widget.propertyModel.agencyid == user!.uid;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: GestureDetector(
-         onTap: () {
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -48,18 +52,17 @@ class _PropertycardState extends State<Propertycard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Image with gradient and favorite button
                   Stack(
                     children: [
-                      // Property Image with Gradient
+                      // صورة العقار
                       Container(
                         height: 250,
                         decoration: BoxDecoration(
-                            // image: DecorationImage(
-                            // image: NetworkImage(widget.propertyModel.imageUrl),
-                            //fit: BoxFit.cover,
-                            // ),
-                            ),
+                          // image: DecorationImage(
+                          // image: NetworkImage(widget.propertyModel.imageUrl),
+                          // fit: BoxFit.cover,
+                          // ),
+                        ),
                         foregroundDecoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topCenter,
@@ -71,35 +74,42 @@ class _PropertycardState extends State<Propertycard> {
                           ),
                         ),
                       ),
-                      // Favorite Button
-                      Positioned(
-                        top: 16,
-                        right: 16,
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white.withOpacity(0.8),
-                          ),
-                          child: IconButton(
-                            icon: Icon(
-                              isFavorite ? Icons.favorite : Icons.favorite_border,
-                              color: isFavorite
-                                  ? Colors.red
-                                  : const Color(0xff052659),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                isFavorite = !isFavorite;
-                              });
-                            
+
+                      // زر تعديل وحذف (يظهر فقط لصاحب العقار)
+                      if (isOwner)
+                        Positioned(
+                          top: 16,
+                          left: 16,
+                          child: PopupMenuButton<String>(
+                            onSelected: (value) {
+                              if (value == 'edit') {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditPropertyScreen(property: widget.propertyModel),
+                                  ),
+                                );
+                              } else if (value == 'delete') {
+                                _deleteProperty(widget.propertyModel.id);
+                              }
                             },
+                            itemBuilder: (context) => [
+                              const PopupMenuItem(
+                                value: 'edit',
+                                child: Text('تعديل'),
+                              ),
+                              const PopupMenuItem(
+                                value: 'delete',
+                                child: Text('حذف'),
+                              ),
+                            ],
+                            icon: const Icon(Icons.more_vert, color: Colors.white),
                           ),
                         ),
-                      ),
                     ],
                   ),
-                  // Property Details
+
+                  // معلومات العقار
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -158,5 +168,19 @@ class _PropertycardState extends State<Propertycard> {
         ),
       ),
     );
+  }
+
+  // حذف العقار
+  Future<void> _deleteProperty(String propertyId) async {
+    try {
+      await FirebaseFirestore.instance.collection('properties').doc(propertyId).delete();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('تم حذف العقار بنجاح')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('خطأ أثناء الحذف: $e')),
+      );
+    }
   }
 }
