@@ -29,7 +29,8 @@ class _PropertycardState extends State<Propertycard> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PropertyDetails(propertyModel: widget.propertyModel),
+              builder: (context) =>
+                  PropertyDetails(propertyModel: widget.propertyModel),
             ),
           );
         },
@@ -58,11 +59,11 @@ class _PropertycardState extends State<Propertycard> {
                       Container(
                         height: 250,
                         decoration: BoxDecoration(
-                          // image: DecorationImage(
-                          // image: NetworkImage(widget.propertyModel.imageUrl),
-                          // fit: BoxFit.cover,
-                          // ),
-                        ),
+                            // image: DecorationImage(
+                            // image: NetworkImage(widget.propertyModel.imageUrl),
+                            // fit: BoxFit.cover,
+                            // ),
+                            ),
                         foregroundDecoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topCenter,
@@ -78,32 +79,34 @@ class _PropertycardState extends State<Propertycard> {
                       // زر تعديل وحذف (يظهر فقط لصاحب العقار)
                       if (isOwner)
                         Positioned(
-                          top: 16,
-                          left: 16,
+                          top: 10,
+                          left: 10,
                           child: PopupMenuButton<String>(
                             onSelected: (value) {
                               if (value == 'edit') {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => EditPropertyScreen(property: widget.propertyModel),
+                                    builder: (context) => EditPropertyScreen(
+                                        property: widget.propertyModel),
                                   ),
                                 );
                               } else if (value == 'delete') {
-                                _deleteProperty(widget.propertyModel.id);
+                                _deleteProperty(context,widget.propertyModel.id);
                               }
                             },
                             itemBuilder: (context) => [
                               const PopupMenuItem(
                                 value: 'edit',
-                                child: Text('تعديل'),
+                                child: Text('تعديل',style: TextStyle(fontFamily: 'Cairo'),textDirection: TextDirection.rtl,),
                               ),
                               const PopupMenuItem(
                                 value: 'delete',
-                                child: Text('حذف'),
+                                child: Text('حذف',style: TextStyle(fontFamily: 'Cairo'),textDirection: TextDirection.rtl,),
                               ),
                             ],
-                            icon: const Icon(Icons.more_vert, color: Colors.white),
+                            icon: const Icon(Icons.more_vert,
+                                color: Colors.white),
                           ),
                         ),
                     ],
@@ -171,16 +174,47 @@ class _PropertycardState extends State<Propertycard> {
   }
 
   // حذف العقار
-  Future<void> _deleteProperty(String propertyId) async {
-    try {
-      await FirebaseFirestore.instance.collection('properties').doc(propertyId).delete();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تم حذف العقار بنجاح')),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('خطأ أثناء الحذف: $e')),
-      );
+  Future<void> _deleteProperty(BuildContext context, String propertyId) async {
+    // عرض Dialog للتأكيد قبل الحذف
+    bool? confirmDelete = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('تأكيد الحذف',style: TextStyle(fontFamily: 'Cairo'),textDirection: TextDirection.rtl,),
+          content: const Text('هل أنت متأكد أنك تريد حذف هذا العقار؟',style: TextStyle(fontFamily: 'Cairo'),),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false); // إغلاق Dialog دون حذف
+              },
+              child: const Text('إلغاء',style: TextStyle(fontFamily: 'Cairo'),),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true); // إغلاق Dialog مع تأكيد الحذف
+              },
+              child: const Text('تأكيد',style: TextStyle(fontFamily: 'Cairo'),),
+            ),
+          ],
+        );
+      },
+    );
+
+    // إذا قام المستخدم بتأكيد الحذف
+    if (confirmDelete == true) {
+      try {
+        await FirebaseFirestore.instance
+            .collection('properties')
+            .doc(propertyId)
+            .delete();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('تم حذف العقار بنجاح',style: TextStyle(fontFamily: 'Cairo'),)),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('خطأ أثناء الحذف: $e',style: TextStyle(fontFamily: 'Cairo'),)),
+        );
+      }
     }
   }
 }

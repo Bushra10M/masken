@@ -28,7 +28,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
       }
 
       if (_validateInputs()) {
-        String agencyId = user.uid;
+        String agencyid = user.uid;
         String propertyId =
             FirebaseFirestore.instance.collection('properties').doc().id;
 
@@ -36,15 +36,15 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
             .collection('properties')
             .doc(propertyId)
             .set({
-          'propertyId': propertyId, // تخزين الـ ID داخل المستند
+          'id': propertyId, // تخزين الـ ID داخل المستند
           'title': titleController.text,
           'location': locationController.text,
-          'price': priceController.text,
+          'price': '${priceController.text} د.ل',
           'description': descriptionController.text,
           'type': typeController.text,
           'status': statusController.text,
           'userId': user.uid,
-          'agencyId': agencyId,
+          'agencyid': agencyid,
           'createdAt': FieldValue.serverTimestamp(),
         });
 

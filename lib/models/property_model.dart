@@ -41,7 +41,7 @@ final String id;
         'price': price,
         'status': status,
         'description': description,
-        'agencyId': agencyid,
+        'agencyid': agencyid,
         'imageUrl': imageUrl,
       };
 }

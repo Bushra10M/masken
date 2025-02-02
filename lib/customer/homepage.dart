@@ -20,12 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // Set status bar style to match the design
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.light,
-    ));
+   
 
     getData();
     super.initState();
@@ -168,14 +163,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Existing methods remain the same
-  Future<void> getData() async {
+ Future<void> getData() async {
+  setState(() {
     isLoading = true;
-    setState(() {});
-    properties = await fetchProperties();
+  });
+
+  properties = await fetchProperties();
+  print("العقارات المسترجعة: ${properties.length}"); // 🔍 تحقق من عدد العقارات
+
+  setState(() {
     applySearch();
     isLoading = false;
-    setState(() {});
-  }
+  });
+}
+
 
   void applySearch() {
     setState(() {

@@ -154,7 +154,7 @@ class _SignupcState extends State<Signupc> {
                        icon: Icons.email_outlined,
                       obscureText: false,
                         keyboardType :TextInputType.text,
-                     inputFormatters: [ FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))]
+                     inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z@#\-_!$%^&*(),.?":{}|<>/+=\s]'))]
                      ),
                   const SizedBox(
                     height: 15.0,
