@@ -102,24 +102,43 @@ class _PropertyDetailsState extends State<PropertyDetails> {
                     children: [
                       // Property Image with Gradient
                       Container(
-                        height: 250,
-                        decoration: BoxDecoration(
-                            // image: DecorationImage(
-                            // image: NetworkImage(widget.propertyModel.imageUrl),
-                            //fit: BoxFit.cover,
-                            // ),
-                            ),
-                        foregroundDecoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.7),
-                            ],
-                          ),
-                        ),
-                      ),
+                      
+  height: 250,
+  child: Stack(
+    fit: StackFit.expand,
+    children: [
+      Image.network(
+        widget.propertyModel.imageUrl,
+        fit: BoxFit.cover,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          } else {
+            return Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        (loadingProgress.expectedTotalBytes ?? 1)
+                    : null,
+              ),
+            );
+          }
+        },
+      ),
+      Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.black.withOpacity(0.7),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),),
                       // Favorite Button
                       Positioned(
                         top: 16,

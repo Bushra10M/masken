@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:masken/agency/edit_property.dart';
+import 'package:masken/customer/fav_provider.dart';
 import 'package:masken/customer/propertydetail.dart';
 import 'package:masken/models/property_model.dart';
 
@@ -56,26 +57,45 @@ class _PropertycardState extends State<Propertycard> {
                   Stack(
                     children: [
                       // صورة العقار
-                      Container(
-                        height: 250,
-                        decoration: BoxDecoration(
-                            // image: DecorationImage(
-                            // image: NetworkImage(widget.propertyModel.imageUrl),
-                            // fit: BoxFit.cover,
-                            // ),
-                            ),
-                        foregroundDecoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.7),
-                            ],
-                          ),
-                        ),
-                      ),
-
+                     Container(
+  height: 250,
+  child: Stack(
+    fit: StackFit.expand,
+    children: [
+      Image.network(
+        widget.propertyModel.imageUrl,
+        fit: BoxFit.cover,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          } else {
+            return Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        (loadingProgress.expectedTotalBytes ?? 1)
+                    : null,
+              ),
+            );
+          }
+        },
+      ),
+      Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.black.withOpacity(0.7),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+FavoriteButton(propertyId: widget.propertyModel.id),
                       // زر تعديل وحذف (يظهر فقط لصاحب العقار)
                       if (isOwner)
                         Positioned(
