@@ -100,7 +100,7 @@ FavoriteButton(propertyId: widget.propertyModel.id),
                       if (isOwner)
                         Positioned(
                           top: 10,
-                          left: 10,
+                          right: 10,
                           child: PopupMenuButton<String>(
                             onSelected: (value) {
                               if (value == 'edit') {

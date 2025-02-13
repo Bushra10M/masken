@@ -20,8 +20,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-   
-
     getData();
     super.initState();
   }
@@ -163,20 +161,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Existing methods remain the same
- Future<void> getData() async {
-  setState(() {
-    isLoading = true;
-  });
+  Future<void> getData() async {
+    setState(() {
+      isLoading = true;
+    });
 
-  properties = await fetchProperties();
-  print("العقارات المسترجعة: ${properties.length}"); // 🔍 تحقق من عدد العقارات
+    properties = await fetchProperties();
+    print(
+        "العقارات المسترجعة: ${properties.length}"); // 🔍 تحقق من عدد العقارات
 
-  setState(() {
-    applySearch();
-    isLoading = false;
-  });
-}
-
+    setState(() {
+      applySearch();
+      isLoading = false;
+    });
+  }
 
   void applySearch() {
     setState(() {
@@ -200,8 +198,13 @@ class _HomePageState extends State<HomePage> {
           final matchesStatus =
               property.status.toLowerCase().contains(searchText);
           final matchesPrice = property.price.toString().contains(searchText);
+          final matchesTitle =
+              property.title.toLowerCase().contains(searchText);
 
-          return matchesLocation || matchesStatus || matchesPrice;
+          return matchesLocation ||
+              matchesStatus ||
+              matchesPrice ||
+              matchesTitle;
         }).toList();
       }
     });
